@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import MenuNavbar from '../components/MenuNavbar';
+import MenuNavbar from '../components/MenuNavbar'
+import Warning from '../components/WarningRules'
 
 import "uikit/dist/css/uikit.min.css"
 import "uikit/dist/js/uikit-icons.min.js"
@@ -49,9 +50,11 @@ export default function Home() {
               </div>
             </div>
 
-            <button class="uk-button uk-button-default uk-button-large">Veja as ideias</button>
+            <button class="uk-button uk-button-default uk-button-large" uk-toggle="target: #modal-close-default">Veja as ideias</button>
           </div>
         </div>
+
+        <Warning />
       </main>
 
       <footer>
