@@ -1,30 +1,45 @@
 import Head from 'next/head'
+import MenuNavbar from '../components/MenuNavbar';
+
+import "uikit/dist/css/uikit.min.css"
+import "uikit/dist/js/uikit-icons.min.js"
+import "uikit/dist/js/uikit.min.js"
 
 export default function Home() {
   return (
-    <div className="container">
+    <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Replica esse jogo</title>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.14/dist/css/uikit.min.css" />
-
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.14/dist/js/uikit.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.14/dist/js/uikit-icons.min.js"></script>
       </Head>
 
       <main>
 
-        <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-          <h3 class="uk-card-title">Default</h3>
-          <p>Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <MenuNavbar />
+
+
+
+        <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
+          <div>
+            <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+              <h3 class="uk-card-title">Default</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </div>
+          </div>
         </div>
-        
+
       </main>
 
       <footer>
-        
+
       </footer>
 
-      </div>
+
+      <style jsx>{`
+        #bg {
+          background-image: url("bg1.jpg");
+        }
+      `}</style>
+    </div>
   )
 }
