@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import MenuNavbar from '../components/MenuNavbar'
 import Warning from '../components/WarningRules'
+import Write from '../components/WriteIdea'
 
 import "uikit/dist/css/uikit.min.css"
 import "uikit/dist/js/uikit-icons.min.js"
@@ -51,10 +52,12 @@ export default function Home() {
             </div>
 
             <button class="uk-button uk-button-default uk-button-large" uk-toggle="target: #modal-idea">Veja as ideias</button>
+            <button class="uk-button uk-button-default uk-button-large" uk-toggle="target: #modal-write-idea">Form as ideias</button>
           </div>
         </div>
 
         <Warning />
+        <Write/>
       </main>
 
       <footer>
