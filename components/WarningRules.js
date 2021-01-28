@@ -1,7 +1,7 @@
 const WarningRules = () => {
     return (
         <div>
-            <div id="modal-close-default" uk-modal="true">
+            <div id="modal-idea" uk-modal="true">
                 <div class="uk-modal-dialog uk-modal-body uk-text-center">
                     <h2 class="uk-modal-title">Antes de qualquer coisa, algumas regras:</h2>
                     <ul class="uk-list uk-list-divider">
