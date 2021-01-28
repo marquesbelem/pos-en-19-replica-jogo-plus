@@ -1,23 +1,18 @@
 
 import "uikit/dist/css/uikit.min.css"
-import "uikit/dist/js/uikit.min.js"
 import "uikit/dist/js/uikit-icons.min.js"
+import "uikit/dist/js/uikit.min.js"
 
-import Head from 'next/head'
 import MenuNavbar from '../components/MenuNavbar'
 import Write from '../components/WriteIdea'
 import HeadCustom from '../components/HeadCustom'
-import Warning from '../components/WarningRules'
-import UIkit from 'uikit';
-import Icons from 'uikit/dist/js/uikit-icons';
+import Link from 'next/link'
 
 export default function Home() {
-    UIkit.use(Icons);
+
     return (
         <div>
-            <Head>
-                <HeadCustom />
-            </Head>
+            <HeadCustom />
 
             <main>
 
@@ -41,15 +36,20 @@ export default function Home() {
                                     <span className="uk-badge" uk-tooltip="Comentarios">3</span>
                                 </div>
                                 <div>
-                                    <a class="uk-button uk-button-around">Saiba mais</a>
+                                    <Link href="/more-idea">
+                                        <a className="uk-button uk-button-default uk-button-around">Saiba mais</a>
+                                    </Link>
+
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </main>
 
             <footer>
+
 
             </footer>
         </div>

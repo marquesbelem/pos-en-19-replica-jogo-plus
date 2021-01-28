@@ -2,7 +2,6 @@ import "uikit/dist/css/uikit.min.css"
 import "uikit/dist/js/uikit.min.js"
 import "uikit/dist/js/uikit-icons.min.js"
 
-import Head from 'next/head'
 import MenuNavbar from '../components/MenuNavbar'
 import Warning from '../components/WarningRules'
 import HeadCustom from '../components/HeadCustom'
@@ -10,9 +9,7 @@ import HeadCustom from '../components/HeadCustom'
 export default function Home() {
   return (
     <div>
-      <Head>
         <HeadCustom />
-      </Head>
 
       <main>
 
