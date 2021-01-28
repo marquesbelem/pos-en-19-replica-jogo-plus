@@ -50,7 +50,7 @@ export default function Home() {
               </div>
             </div>
 
-            <button className="uk-button uk-button-default uk-button-large" uk-toggle="target: #modal-idea">Veja as ideias</button>
+            <button className="uk-button uk-button-default uk-button-large" uk-toggle="target: #modal-rules">Veja as ideias</button>
           </div>
         </div>
 

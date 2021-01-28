@@ -1,7 +1,20 @@
+import UIkit from "uikit";
+import React, {useEffect} from "react"
+import { useRouter } from 'next/router'
+
 const WarningRules = () => {
+    const router = useRouter()
+
+    useEffect(() => {
+        UIkit.util.on(document, 'hide', '#modal-rules', function() {
+            console.log('msg ...');
+            router.push('/ideas')
+        });
+      }, [])
+
     return (
         <div>
-            <div id="modal-idea" uk-modal="true">
+            <div id="modal-rules" uk-modal="true">
                 <div className="uk-modal-dialog uk-modal-body uk-text-center">
                     <h2 className="uk-modal-title">Antes de qualquer coisa, algumas regras:</h2>
                     <ul className="uk-list uk-list-divider">
@@ -17,4 +30,4 @@ const WarningRules = () => {
     )
 }
 
-export default WarningRules;
+export default WarningRules; 
