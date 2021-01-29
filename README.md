@@ -1,1 +1,3 @@
-# pos-en-19-replica-jogo-plus
+# Replica esse jogo plus
+
+É um projeto desenvolvido para meu TCC da Pós Graduação de Engenharia de Software
