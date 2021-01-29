@@ -20,11 +20,10 @@ export default function Home() {
 
                 <div className="uk-container">
                     <div className="uk-flex uk-flex-right uk-margin-bottom">
-                        <button className="uk-button uk-button-default uk-button-large" uk-toggle="target: #modal-write-idea">Escrever ideia</button>
+                        <button className="uk-button uk-button-default uk-button-large" type="button">Escrever ideia</button>
                     </div>
-
+                    
                     <Write />
-
 
                     <div className="uk-flex">
                         <div className="uk-card uk-card-default uk-card-hover uk-card-body">

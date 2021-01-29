@@ -13,13 +13,13 @@ export default async (_, res) => {
 
 import db from "../../config/firebase-admin"
 
-export default async (req, _) => {
+export default async (req, res) => {
     const { title, content } = req.body
 
-    const res = await db.collection('ideas').add({
+    const result = await db.collection('ideas').add({
         title: title,
         content: content
       });
       
-    _.send('sucess');
+    res.send('sucess');
 }

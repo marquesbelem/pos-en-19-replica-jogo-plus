@@ -19,7 +19,7 @@ const Home = ({ allCategories, errorCategories }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/api/site', modifiedData);
+      const response = await axios.post('/api/postIdeas', modifiedData);
       console.log(response);
     } catch (error) {
       setErrorRestaurants(error);
