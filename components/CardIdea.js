@@ -1,38 +1,45 @@
+
+import axios from 'axios';
 import React, { useState } from 'react'
-import { useFetch } from '../config/fetcher'
+import Link from 'next/link'
 
-const WriteIdea = () => {
+const CardIdea = () => {
 
-    const { data } = useFetch('api/site');
-    console.log(data);
+    const [data, setData] = useState(null);
+
+    axios.get('/api/getIdeas').then(response => {
+        setData(response.data);
+    });
+
     if (!data) {
         return (
             <div>
-                <div id="modal-write-idea" uk-modal="true">
-                    <div className="uk-modal-dialog uk-modal-body uk-text-center">
-                        <h2 className="uk-modal-title">Escreva sua ideia</h2>
-                      carregando
-                    </div>
-                </div>
+                carregando
             </div>
         );
     }
     return (
-
         <div>
+            {data.map((idea) => (
+                <div className="uk-card uk-card-default uk-card-hover uk-card-body uk-margin-bottom"
+                    key={idea.id}>
+                    <h3 className="uk-card-title">{idea.title}</h3>
+                    <p>{idea.content}</p>
 
-            <div id="modal-write-idea" uk-modal="true">
-                <div className="uk-modal-dialog uk-modal-body uk-text-center">
-                    <h2 className="uk-modal-title">Escreva sua ideia</h2>
-                    {data.map((idea) => (
-                        <li key={idea.id}>
-                            {idea.title}
-                        </li>
-                    ))}
+                    <div className="uk-flex uk-flex-between">
+                        <div>
+                            <span className="uk-badge" uk-tooltip="Comentarios">3</span>
+                        </div>
+                        <div>
+                            <Link href="/more-idea">
+                                <a className="uk-button uk-button-default uk-button-around">Saiba mais</a>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            ))}
         </div>
     )
 }
 
-export default WriteIdea;
+export default CardIdea;
