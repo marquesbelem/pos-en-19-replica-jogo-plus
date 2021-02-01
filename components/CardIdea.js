@@ -13,8 +13,8 @@ const CardIdea = () => {
 
     if (!data) {
         return (
-            <div>
-                carregando
+            <div className="uk-text-center">
+                <span uk-spinner="ratio: 4.5"></span>
             </div>
         );
     }

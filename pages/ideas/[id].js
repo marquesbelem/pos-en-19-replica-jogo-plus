@@ -33,8 +33,8 @@ export default function DetailIdea(props) {
                     <MenuNavbar />
 
                     <div className="uk-container">
-                        <div className="uk-card uk-card-default uk-card-body">
-                            carregando
+                        <div className="uk-card uk-card-default uk-card-body uk-text-center">
+                            <span uk-spinner="ratio: 4.5"></span>
                         </div>
                     </div>
                 </main>
