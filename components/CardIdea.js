@@ -31,7 +31,7 @@ const CardIdea = () => {
                             <span className="uk-badge" uk-tooltip="Comentarios">3</span>
                         </div>
                         <div>
-                            <Link href="/more-idea">
+                            <Link href="/ideas/[id]" as={'/ideas/' + idea.id}>
                                 <a className="uk-button uk-button-default uk-button-around">Saiba mais</a>
                             </Link>
                         </div>

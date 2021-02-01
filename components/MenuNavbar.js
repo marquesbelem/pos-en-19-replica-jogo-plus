@@ -12,7 +12,7 @@ const MenuNavbar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/ideas">
+                            <Link href="/ideas/">
                                 <a>Ideais</a>
                             </Link>
                         </li>

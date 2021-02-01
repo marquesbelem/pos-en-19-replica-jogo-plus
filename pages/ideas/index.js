@@ -3,10 +3,10 @@ import "uikit/dist/css/uikit.min.css"
 import "uikit/dist/js/uikit-icons.min.js"
 import "uikit/dist/js/uikit.min.js"
 
-import MenuNavbar from '../components/MenuNavbar'
-import Write from '../components/WriteIdea'
-import HeadCustom from '../components/HeadCustom'
-import CardIdea from '../components/CardIdea'
+import MenuNavbar from '../../components/MenuNavbar'
+import Write from '../../components/WriteIdea'
+import HeadCustom from '../../components/HeadCustom'
+import CardIdea from '../../components/CardIdea'
 
 export default function Home() {
 
