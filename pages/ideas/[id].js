@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import UIkit from "uikit";
 import CommentCard from '../../components/CommentCard'
-import { createPortal } from "react-dom"
+import Router from 'next/router'
 
 DetailIdea.getInitialProps = ({ query }) => {
     return {
@@ -55,7 +55,6 @@ export default function DetailIdea(props) {
         }
 
         try {
-
             let comments = [];
             
             if(response.data.comments) {
@@ -73,6 +72,8 @@ export default function DetailIdea(props) {
             const res = await axios.post('/api/ideas/' + props.id, updateData);
             UIkit.notification('Seu comentario foi enviado com sucesso!', 'success');
 
+            setTimeout(() => { Router.reload(window.location.pathname); }, 2000);
+            
         } catch (error) {
             console.log(error);
             UIkit.notification('Erro no envio do comentario, tente novamente!', 'danger');

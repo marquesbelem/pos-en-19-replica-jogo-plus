@@ -18,6 +18,8 @@ const CardIdea = () => {
             </div>
         );
     }
+    
+
     return (
         <div>
             {data.map((idea) => (
@@ -28,7 +30,7 @@ const CardIdea = () => {
 
                     <div className="uk-flex uk-flex-between">
                         <div>
-                            <span className="uk-badge" uk-tooltip="Comentarios">3</span>
+                            <span className="uk-badge" uk-tooltip="Comentarios">{idea.comments ? Object.keys(idea.comments).length : 0}</span>
                         </div>
                         <div>
                             <Link href="/ideas/[id]" as={'/ideas/' + idea.id}>
