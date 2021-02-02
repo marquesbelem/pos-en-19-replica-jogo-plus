@@ -7,6 +7,8 @@ import MenuNavbar from '../../components/MenuNavbar'
 import HeadCustom from '../../components/HeadCustom'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import UIkit from "uikit";
+import CommentCard from '../../components/CommentCard'
 
 DetailIdea.getInitialProps = ({ query }) => {
     return {
@@ -19,10 +21,54 @@ export default function DetailIdea(props) {
     const [response, setResponse] = useState(null);
 
     useEffect(async () => {
-        console.log(props.id);
+
         const res = await axios.get('/api/ideas/' + props.id);
         setResponse(res);
     }, []);
+
+    const [msgValidation, setMsgValidation] = useState(null);
+
+    const [comment, setComment] = useState({
+        content: ''
+    });
+
+    const handleChange = ({ target: { name, value } }) => {
+        setComment(prev => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+
+        if (comment.content.length <= 0) {
+            setMsgValidation("Campo obrigatório.");
+            return;
+        }
+        else {
+            setMsgValidation("");
+        }
+
+        try {
+            const comments = [];
+            comments.push(comment);
+
+            const updateData = {
+                title: response.data.detail.title,
+                content: response.data.detail.content,
+                comments: comments
+            }
+
+            const res = await axios.post('/api/ideas/' + props.id, updateData);
+            UIkit.notification('Seu comentario foi enviado com sucesso!', 'success');
+
+        } catch (error) {
+            console.log(error);
+            UIkit.notification('Erro no envio do comentario, tente novamente!', 'danger');
+        }
+    };
+
 
     if (!response) {
         return (
@@ -56,30 +102,28 @@ export default function DetailIdea(props) {
                 <div className="uk-container">
                     <div className="uk-card uk-card-default uk-card-body">
                         <h1 className="uk-text-center">{response.data.title}</h1>
-                        <p>{response.data.title}</p>
+                        <p>{response.data.content}</p>
                         <hr className="uk-divider-icon"></hr>
                         <h2 className="uk-text-center">Comentários</h2>
-                        <div className="uk-flex uk-flex-right uk-margin-bottom">
-                            <button className="uk-button uk-button-default">Comentar</button>
+
+                        <div className="uk-card uk-card-body">
+                            <form onSubmit={handleSubmit}>
+
+                                <textarea className="uk-textarea" rows="5" placeholder="Escreve seu comentário ..." maxLength="300" type="text " name="content"
+                                    value={comment.content}
+                                    onChange={handleChange} />
+
+                                <span className="uk-text-danger uk-text-left uk-margin-bottom">{msgValidation}</span>
+
+                                <p className="uk-margin-bottom uk-text-dark uk-text-right"><span>Limite de 300 caracteres.</span></p>
+                                <div className="uk-flex uk-flex-right uk-margin-bottom">
+                                    <button className="uk-button uk-button-default" type="submit" >Comentar</button>
+                                </div>
+                            </form>
                         </div>
 
-                        <div>
-                            <article className="uk-comment uk-comment-primary">
-                                <header className="uk-comment-header">
-                                    <div className="uk-grid-medium uk-flex-middle" uk-grid="true">
-                                        <div className="uk-width-expand">
-                                            <h4 className="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Author</a></h4>
-                                            <ul className="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                                <li><a href="#">12 days ago</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </header>
-                                <div className="uk-comment-body">
-                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                                </div>
-                            </article>
-                        </div>
+                        <CommentCard comments={response.data.comments}/>
+                        
                     </div>
                 </div>
             </main>

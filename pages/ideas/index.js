@@ -27,10 +27,6 @@ export default function Home() {
 
                     <CardIdea />
 
-                    <div className="uk-flex">
-                        
-                    </div>
-
                 </div>
             </main>
 
