@@ -9,6 +9,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import UIkit from "uikit";
 import CommentCard from '../../components/CommentCard'
+import { createPortal } from "react-dom"
 
 DetailIdea.getInitialProps = ({ query }) => {
     return {
@@ -21,15 +22,18 @@ export default function DetailIdea(props) {
     const [response, setResponse] = useState(null);
 
     useEffect(async () => {
-
         const res = await axios.get('/api/ideas/' + props.id);
         setResponse(res);
     }, []);
 
     const [msgValidation, setMsgValidation] = useState(null);
 
+    let date = new Date();
+    let dateFormatada = ((date.getDate() )) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear(); 
+
     const [comment, setComment] = useState({
-        content: ''
+        content: '',
+        datePublish: dateFormatada
     });
 
     const handleChange = ({ target: { name, value } }) => {
@@ -51,12 +55,18 @@ export default function DetailIdea(props) {
         }
 
         try {
-            const comments = [];
+
+            let comments = [];
+            
+            if(response.data.comments) {
+                comments = response.data.comments;
+            }
+            
             comments.push(comment);
 
             const updateData = {
-                title: response.data.detail.title,
-                content: response.data.detail.content,
+                title: response.data.title,
+                content: response.data.content,
                 comments: comments
             }
 
@@ -123,7 +133,7 @@ export default function DetailIdea(props) {
                         </div>
 
                         <CommentCard comments={response.data.comments}/>
-                        
+
                     </div>
                 </div>
             </main>

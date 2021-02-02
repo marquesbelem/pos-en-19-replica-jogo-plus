@@ -6,24 +6,12 @@ export default async (req, res) => {
   if (req.method === 'GET') {
     const doc = await db.collection("ideas").doc(id).get();
   
-
     if (!doc.exists) {
       res.status(404).end();
     } else {
-      
-      /*const comments = await db.collection("ideas").doc(id).collection("comments").get();
-      // const comments = await db.collection("ideas").doc(id).listCollections()
-      if(comments.exists) {
-        res.status(200).json({detail: doc.data(), comments: comments.data()});
-        console.log("api:: " + comments.data());
-      }
-      else {
-        res.status(200).json({detail: doc.data(), comments: []});
-        console.log("api2:: ");
-      }*/
-
       res.status(200).json(doc.data());
     }
+
   } else if (req.method === 'PUT') {
 
   } else {
