@@ -29,7 +29,7 @@ export default function DetailIdea(props) {
     const [msgValidation, setMsgValidation] = useState(null);
 
     let date = new Date();
-    let dateFormatada = ((date.getDate() )) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear(); 
+    let dateFormatada = ((date.getDate())) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear();
 
     const [comment, setComment] = useState({
         content: '',
@@ -56,11 +56,11 @@ export default function DetailIdea(props) {
 
         try {
             let comments = [];
-            
-            if(response.data.comments) {
+
+            if (response.data.comments) {
                 comments = response.data.comments;
             }
-            
+
             comments.push(comment);
 
             const updateData = {
@@ -73,7 +73,7 @@ export default function DetailIdea(props) {
             UIkit.notification('Seu comentario foi enviado com sucesso!', 'success');
 
             setTimeout(() => { Router.reload(window.location.pathname); }, 2000);
-            
+
         } catch (error) {
             console.log(error);
             UIkit.notification('Erro no envio do comentario, tente novamente!', 'danger');
@@ -112,6 +112,7 @@ export default function DetailIdea(props) {
 
                 <div className="uk-container">
                     <div className="uk-card uk-card-default uk-card-body">
+                        <span class="uk-label">{idea.category ? idea.category : " "}</span>
                         <h1 className="uk-text-center">{response.data.title}</h1>
                         <p>{response.data.content}</p>
                         <hr className="uk-divider-icon"></hr>
@@ -133,7 +134,7 @@ export default function DetailIdea(props) {
                             </form>
                         </div>
 
-                        <CommentCard comments={response.data.comments}/>
+                        <CommentCard comments={response.data.comments} />
 
                     </div>
                 </div>

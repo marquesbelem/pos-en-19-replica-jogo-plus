@@ -4,11 +4,47 @@ import UIkit from "uikit";
 
 const WriteIdea = () => {
 
+    const genre = [
+        {
+            title: 'Ação',
+            idFilter: '#Acao'
+        },
+        {
+            title: 'Aventura',
+            idFilter: '#Aventura'
+        },
+        {
+            title: 'Simulação',
+            idFilter: '#Simulacao'
+        },
+        {
+            title: 'Estratégia',
+            idFilter: '#Estrategia'
+        },
+        {
+            title: 'Esporte',
+            idFilter: '#Esporte'
+        },
+        {
+            title: 'FPS',
+            idFilter: '#FPS'
+        },
+        {
+            title: 'RPG',
+            idFilter: '#RPG'
+        },
+        {
+            title: 'Moba',
+            idFilter: '#Moba'
+        }
+    ]
+    
     const [msgValidation, setMsgValidation] = useState(null);
 
     const [data, setData] = useState({
         title: '',
-        content: ''
+        content: '',
+        category: ''
     });
 
     const [errorData, setErrorData] = useState(null);
@@ -69,6 +105,16 @@ const WriteIdea = () => {
                     <span className="uk-text-danger uk-text-left uk-margin-bottom">{msgValidation}</span>
 
                     <p className="uk-margin-bottom uk-text-dark uk-text-right"><span>Limite de 300 caracteres.</span></p>
+
+                    <label>Qual gênero mais se encaixa na sua ideia?</label>
+                    <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                        {genre.map((g) => (
+                            <label key={g.id}><input class="uk-radio" type="radio" name="category"
+                                value={JSON.stringify(g)}
+                                onChange={handleChange} /> {g.title}</label>
+                        ))}
+                    </div>
+
                     <button className="uk-button uk-button-default" type="submit" >Enviar</button>
                 </form>
             </div>

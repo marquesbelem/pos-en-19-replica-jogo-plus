@@ -5,6 +5,41 @@ import Link from 'next/link'
 
 const CardIdea = () => {
 
+    const genre = [
+        {
+            title: 'Ação',
+            idFilter: '#Acao'
+        },
+        {
+            title: 'Aventura',
+            idFilter: '#Aventura'
+        },
+        {
+            title: 'Simulação',
+            idFilter: '#Simulacao'
+        },
+        {
+            title: 'Estratégia',
+            idFilter: '#Estrategia'
+        },
+        {
+            title: 'Esporte',
+            idFilter: '#Esporte'
+        },
+        {
+            title: 'FPS',
+            idFilter: '#FPS'
+        },
+        {
+            title: 'RPG',
+            idFilter: '#RPG'
+        },
+        {
+            title: 'Moba',
+            idFilter: '#Moba'
+        }
+    ]
+
     const [data, setData] = useState(null);
 
     axios.get('/api/getIdeas').then(response => {
@@ -18,13 +53,21 @@ const CardIdea = () => {
             </div>
         );
     }
-    
+
 
     return (
         <div>
+            <ul class="uk-subnav uk-subnav-pill">
+                {genre.map((g) => (
+                     <li key={g.id} uk-filter-control={g.idFilter}><a href="#">{g.title}</a></li>
+                ))}
+            </ul>
+
             {data.map((idea) => (
-                <div className="uk-card uk-card-default uk-card-hover uk-card-body uk-margin-bottom"
+                <div className="uk-card uk-card-default uk-card-hover uk-card-body uk-margin-bottom" 
+                    id={idea.category ? idea.category.idFilter : ""}
                     key={idea.id}>
+                    <span class="uk-label">{idea.category ? idea.category.title : " "}</span>
                     <h3 className="uk-card-title">{idea.title}</h3>
                     <p>{idea.content}</p>
 
