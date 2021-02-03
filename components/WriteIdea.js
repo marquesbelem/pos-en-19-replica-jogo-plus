@@ -1,53 +1,61 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
 import UIkit from "uikit";
+import firebase from "../config/firebase-admin"
+import Router from 'next/router'
 
 const WriteIdea = () => {
 
     const genre = [
         {
-            title: 'Ação',
-            idFilter: '#Acao'
+            id: 0, 
+            title: 'Ação'
         },
         {
-            title: 'Aventura',
-            idFilter: '#Aventura'
+            id: 1, 
+            title: 'Aventura'
+        },
+         {
+            id: 2, 
+            title: 'Esporte'
         },
         {
-            title: 'Simulação',
-            idFilter: '#Simulacao'
+            id: 3, 
+            title: 'Estratégia'
         },
         {
-            title: 'Estratégia',
-            idFilter: '#Estrategia'
+            id: 4, 
+            title: 'Simulação'
         },
         {
-            title: 'Esporte',
-            idFilter: '#Esporte'
+            id: 5, 
+            title: 'Moba'
         },
         {
-            title: 'FPS',
-            idFilter: '#FPS'
+            id: 6, 
+            title: 'RPG'
         },
         {
-            title: 'RPG',
-            idFilter: '#RPG'
+            id: 7, 
+            title: 'FPS'
         },
         {
-            title: 'Moba',
-            idFilter: '#Moba'
+            id: 8, 
+            title: 'Outros'
         }
     ]
-    
+
+    let date = new Date();
+    let dateFormatada = ((date.getDate())) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear();
+
     const [msgValidation, setMsgValidation] = useState(null);
 
     const [data, setData] = useState({
         title: '',
         content: '',
-        category: ''
+        createdate: dateFormatada,
+        category: '',
+        comments: []
     });
-
-    const [errorData, setErrorData] = useState(null);
 
     const handleChange = ({ target: { name, value } }) => {
         setData(prev => ({
@@ -72,18 +80,18 @@ const WriteIdea = () => {
             setMsgValidation("");
         }
 
-        try {
-            const response = await axios.post('/api/postIdeas', data);
-            console.log(response);
-            console.log(data);
+        let idea_ref = firebase.database().ref('ideas');
 
-            UIkit.notification('Sua ideia foi enviada com sucesso!', 'success');
+        idea_ref.push(data)
+            .then(function () {
+                UIkit.notification('Sua ideia foi enviada com sucesso!', 'success');
+               // Router.reload(window.location.pathname);
+            })
+            .catch(function (error) {
+                UIkit.notification('Erro no envio da ideia, tente novamente!', 'danger');
+            });
 
-        } catch (error) {
-            setErrorData(error);
-
-            UIkit.notification('Erro no envio da ideia, tente novamente!', 'danger');
-        }
+        console.log(data);
 
         UIkit.dropdown('.uk-dropdown', {
             delayHide: 2
@@ -107,13 +115,13 @@ const WriteIdea = () => {
                     <p className="uk-margin-bottom uk-text-dark uk-text-right"><span>Limite de 300 caracteres.</span></p>
 
                     <label>Qual gênero mais se encaixa na sua ideia?</label>
-                    <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                   <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                         {genre.map((g) => (
                             <label key={g.id}><input class="uk-radio" type="radio" name="category"
-                                value={JSON.stringify(g)}
+                                value={g.title}
                                 onChange={handleChange} /> {g.title}</label>
                         ))}
-                    </div>
+                    </div> 
 
                     <button className="uk-button uk-button-default" type="submit" >Enviar</button>
                 </form>

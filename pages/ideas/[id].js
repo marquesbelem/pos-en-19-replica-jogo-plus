@@ -6,10 +6,10 @@ import "uikit/dist/js/uikit-icons.min.js"
 import MenuNavbar from '../../components/MenuNavbar'
 import HeadCustom from '../../components/HeadCustom'
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import UIkit from "uikit";
 import CommentCard from '../../components/CommentCard'
 import Router from 'next/router'
+import firebase from "../../config/firebase-admin"
 
 DetailIdea.getInitialProps = ({ query }) => {
     return {
@@ -22,8 +22,21 @@ export default function DetailIdea(props) {
     const [response, setResponse] = useState(null);
 
     useEffect(async () => {
-        const res = await axios.get('/api/ideas/' + props.id);
-        setResponse(res);
+        let idea_ref = firebase.database().ref('/ideas/' + props.id);
+        idea_ref.once('value').then((snapshot) => {
+            const idea = {
+                id: snapshot.key,
+                title: snapshot.val().title,
+                content: snapshot.val().content,
+                createdate: snapshot.val().dateFormatada,
+                category: snapshot.val().category,
+                comments: snapshot.val().comments
+            }
+            setResponse(idea);
+        }, function (errorObject) {
+            UIkit.notification('Erro no servidor!', 'danger');
+            console.log("The read failed: " + errorObject.code);
+        });
     }, []);
 
     const [msgValidation, setMsgValidation] = useState(null);
@@ -54,30 +67,31 @@ export default function DetailIdea(props) {
             setMsgValidation("");
         }
 
-        try {
-            let comments = [];
 
-            if (response.data.comments) {
-                comments = response.data.comments;
-            }
+        let comments = [];
 
-            comments.push(comment);
+        if (response.comments) {
+            comments = response.comments;
+        }
 
-            const updateData = {
-                title: response.data.title,
-                content: response.data.content,
-                comments: comments
-            }
+        comments.push(comment);
 
-            const res = await axios.post('/api/ideas/' + props.id, updateData);
+        const updateData = {
+            id: response.id,
+            title: response.title,
+            content: response.content,
+            createdate: 'response.dateFormatada',
+            category: response.category,
+            comments: comments
+        }
+
+        let idea_ref = firebase.database().ref('/ideas/' + response.id);
+        idea_ref.update(updateData).then(() => {
             UIkit.notification('Seu comentario foi enviado com sucesso!', 'success');
 
-            setTimeout(() => { Router.reload(window.location.pathname); }, 2000);
-
-        } catch (error) {
-            console.log(error);
+        }, function (errorObject) {
             UIkit.notification('Erro no envio do comentario, tente novamente!', 'danger');
-        }
+        });
     };
 
 
@@ -112,9 +126,9 @@ export default function DetailIdea(props) {
 
                 <div className="uk-container">
                     <div className="uk-card uk-card-default uk-card-body">
-                        <span class="uk-label">{idea.category ? idea.category : " "}</span>
-                        <h1 className="uk-text-center">{response.data.title}</h1>
-                        <p>{response.data.content}</p>
+                        <span class="uk-label">{response.category ? response.category : " "}</span>
+                        <h1 className="uk-text-center">{response.title}</h1>
+                        <p>{response.content}</p>
                         <hr className="uk-divider-icon"></hr>
                         <h2 className="uk-text-center">Comentários</h2>
 
@@ -134,7 +148,7 @@ export default function DetailIdea(props) {
                             </form>
                         </div>
 
-                        <CommentCard comments={response.data.comments} />
+                        <CommentCard comments={response.comments} />
 
                     </div>
                 </div>
