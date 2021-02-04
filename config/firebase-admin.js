@@ -14,13 +14,13 @@ import 'firebase/firebase-database';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "AIzaSyAXNuvbe5Qz28ZGUiwobBK0UBCvA7ZpJwI",
-    authDomain: "replicajogoplus.firebaseapp.com",
-    databaseURL: "https://replicajogoplus-default-rtdb.firebaseio.com",
-    projectId: "replicajogoplus",
-    storageBucket: "replicajogoplus.appspot.com",
-    messagingSenderId: "881393937368",
-    appId: "1:881393937368:web:64857484fbfe958685e0ad"
+    apiKey:process.env.CONFIG_API_KEY,
+    authDomain:process.env.CONFIG_AUTH_DOMAIN,
+    databaseURL:"https://replicajogoplus-default-rtdb.firebaseio.com",
+    projectId:process.env.CONFIG_PROJECT_ID,
+    storageBucket:process.env.CONFIG_STORAGE,
+    messagingSenderId:process.env.CONFIG_MESSAGIN,
+    appId:process.env.CONFIG_APP_ID
 };
 // Initialize Firebase
 if (!firebase.apps.length) {

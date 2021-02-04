@@ -46,18 +46,18 @@ const CardIdea = () => {
         }
     ]
 
-    const data = [];
+    const data = []
 
     let idea_ref = firebase.database().ref('ideas');
 
     idea_ref.on('value', (snapshot) => {
         snapshot.forEach((childSnapshot) => {
-            data.push(ModelIdea(childSnapshot.val(), childSnapshot.key));
+           data.push(ModelIdea(childSnapshot.val(), childSnapshot.key));
         });
-
         //Todo: Remover 
         // console.log(data);
     });
+    
 
     if (!data) {
         return (
