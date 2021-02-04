@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import firebase from "../config/firebase-admin"
 import ModelIdea from "../config/data-idea"
+import FilterWords from "../config/moderation-words"
 
 const CardIdea = () => {
 
@@ -51,12 +52,12 @@ const CardIdea = () => {
 
     idea_ref.on('value', (snapshot) => {
         snapshot.forEach((childSnapshot) => {
-            data.push(ModelIdea(childSnapshot.val(),childSnapshot.key));
+            data.push(ModelIdea(childSnapshot.val(), childSnapshot.key));
         });
 
         //Todo: Remover 
-        console.log(data);
-      });
+        // console.log(data);
+    });
 
     if (!data) {
         return (
@@ -82,8 +83,8 @@ const CardIdea = () => {
                         <div className="uk-card uk-card-default uk-card-hover uk-card-body uk-margin-bottom"
                             key={idea.id}>
                             <span class="uk-label">{idea.category ? idea.category : " "}</span>
-                            <h3 className="uk-card-title">{idea.title}</h3>
-                            <p>{idea.content}</p>
+                            <h3 className="uk-card-title">{FilterWords(idea.title)}</h3>
+                            <p className="wrap-overflow">{FilterWords(idea.content)}</p>
 
                             <div className="uk-flex uk-flex-between">
                                 <div>
@@ -99,6 +100,15 @@ const CardIdea = () => {
                     </div>
                 ))}
             </div>
+
+            <style jsx>{`
+                .wrap-overflow {
+                    white-space: nowrap;  
+                    text-overflow: ellipsis;
+                    width: 100%;
+                    overflow: hidden;  
+                }
+            `}</style>
         </div>
     )
 }

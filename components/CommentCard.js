@@ -1,4 +1,5 @@
 import React from 'react'
+import FilterWords from "../config/moderation-words"
 
 const CommentCard = ({comments}) => {
 
@@ -26,7 +27,7 @@ const CommentCard = ({comments}) => {
                             </div>
                         </header>
                         <div className="uk-comment-body">
-                            <p>{comment.content}</p>
+                            <p>{FilterWords(comment.content)}</p>
                         </div>
                     </article>
                 </div>

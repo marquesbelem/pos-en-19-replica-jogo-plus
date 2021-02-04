@@ -11,6 +11,7 @@ import CommentCard from '../../components/CommentCard'
 import Router from 'next/router'
 import firebase from "../../config/firebase-admin"
 import ModelIdea from "../../config/data-idea"
+import FilterWords from "../config/moderation-words"
 
 DetailIdea.getInitialProps = ({ query }) => {
     return {
@@ -25,15 +26,6 @@ export default function DetailIdea(props) {
     useEffect(async () => {
         let idea_ref = firebase.database().ref('/ideas/' + props.id);
 
-      /*  idea_ref.once('value').then((snapshot) => {
-
-            console.log(">> val(): " + snapshot.val().createdate);
-            setResponse(ModelIdea(snapshot.val(),snapshot.key));
-
-        }, function (errorObject) {
-            UIkit.notification('Erro no servidor!', 'danger');
-            console.log("The read failed: " + errorObject.code);
-        });*/
         idea_ref.on('value', (snapshot) => {
                 setResponse(ModelIdea(snapshot.val(),snapshot.key));
         });
@@ -91,7 +83,7 @@ export default function DetailIdea(props) {
 
             UIkit.notification('Seu comentario foi enviado com sucesso!', 'success');
             setComment({content: ' '}); 
-            
+
         }, function (errorObject) {
             UIkit.notification('Erro no envio do comentario, tente novamente!', 'danger');
         });
@@ -130,8 +122,8 @@ export default function DetailIdea(props) {
                 <div className="uk-container">
                     <div className="uk-card uk-card-default uk-card-body">
                         <span class="uk-label">{response.category ? response.category : " "}</span>
-                        <h1 className="uk-text-center">{response.title}</h1>
-                        <p>{response.content}</p>
+                        <h1 className="uk-text-center">{FilterWords(response.title)}</h1>
+                        <p>{FilterWords(response.content)}</p>
                         <hr className="uk-divider-icon"></hr>
                         <h2 className="uk-text-center">Comentários</h2>
 
