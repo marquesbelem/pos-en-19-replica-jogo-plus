@@ -47,7 +47,7 @@ export default function Home() {
                     <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky" className="uk-width-1-1 uk-margin-bottom">
                         <nav class="uk-navbar-container uk-width-1-1" uk-navbar="dropbar: true;">
                             <div className="uk-flex uk-flex-right uk-width-1-1">
-                                <button className="uk-button uk-button-default uk-button-large uk-width-1-1" type="button">Escrever ideia</button>
+                                <button className="uk-button uk-button-large uk-width-1-1" type="button">Escrever ideia</button>
                             </div>
                         </nav>
                     </div>
@@ -85,19 +85,21 @@ export default function Home() {
                             ))}
                         </div>
 
-                        <style jsx>{`
-                .wrap-overflow {
-                    white-space: nowrap;  
-                    text-overflow: ellipsis;
-                    width: 100%;
-                    overflow: hidden;  
-                }
-                .w-100 {
-                    width: 100%;
-                }
-            `}</style>
-                    </div>
+                        <a className="uk-button uk-button-primary" href="#" uk-scroll>Scroll down</a>
 
+                    </div>
+                    <style jsx>{`
+                        .wrap-overflow {
+                            white-space: nowrap;  
+                            text-overflow: ellipsis;
+                            width: 100%;
+                            overflow: hidden;  
+                        }
+                        .w-100 {
+                            width: 100%;
+                        }
+                    `}
+                    </style>
                 </div>
             </main>
 
