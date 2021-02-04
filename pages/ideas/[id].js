@@ -8,10 +8,10 @@ import HeadCustom from '../../components/HeadCustom'
 import React, { useState, useEffect } from 'react'
 import UIkit from "uikit";
 import CommentCard from '../../components/CommentCard'
-import Router from 'next/router'
 import firebase from "../../config/firebase-admin"
 import ModelIdea from "../../config/data-idea"
 import FilterWords from "../../config/moderation-words"
+import GenereteId from "../../config/generate-id"
 
 DetailIdea.getInitialProps = ({ query }) => {
     return {
@@ -27,7 +27,7 @@ export default function DetailIdea(props) {
         let idea_ref = firebase.database().ref('/ideas/' + props.id);
 
         idea_ref.on('value', (snapshot) => {
-                setResponse(ModelIdea(snapshot.val(),snapshot.key));
+            setResponse(ModelIdea(snapshot.val(), snapshot.key));
         });
     }, []);
 
@@ -37,6 +37,7 @@ export default function DetailIdea(props) {
     let dateFormatada = ((date.getDate())) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear();
 
     const [comment, setComment] = useState({
+        id: GenereteId(),
         content: '',
         datePublish: dateFormatada
     });
@@ -82,7 +83,7 @@ export default function DetailIdea(props) {
         idea_ref.update(updateData).then(() => {
 
             UIkit.notification('Seu comentario foi enviado com sucesso!', 'success');
-            setComment({content: ' '}); 
+            setComment({ content: ' ' });
 
         }, function (errorObject) {
             UIkit.notification('Erro no envio do comentario, tente novamente!', 'danger');
