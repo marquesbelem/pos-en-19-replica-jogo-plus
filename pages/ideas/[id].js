@@ -25,13 +25,17 @@ export default function DetailIdea(props) {
     useEffect(async () => {
         let idea_ref = firebase.database().ref('/ideas/' + props.id);
 
-        idea_ref.once('value').then((snapshot) => {
+      /*  idea_ref.once('value').then((snapshot) => {
 
+            console.log(">> val(): " + snapshot.val().createdate);
             setResponse(ModelIdea(snapshot.val(),snapshot.key));
 
         }, function (errorObject) {
             UIkit.notification('Erro no servidor!', 'danger');
             console.log("The read failed: " + errorObject.code);
+        });*/
+        idea_ref.on('value', (snapshot) => {
+                setResponse(ModelIdea(snapshot.val(),snapshot.key));
         });
     }, []);
 
