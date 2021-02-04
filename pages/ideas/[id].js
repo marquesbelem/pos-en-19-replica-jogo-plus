@@ -11,7 +11,7 @@ import CommentCard from '../../components/CommentCard'
 import Router from 'next/router'
 import firebase from "../../config/firebase-admin"
 import ModelIdea from "../../config/data-idea"
-import FilterWords from "../config/moderation-words"
+import FilterWords from "../../config/moderation-words"
 
 DetailIdea.getInitialProps = ({ query }) => {
     return {
