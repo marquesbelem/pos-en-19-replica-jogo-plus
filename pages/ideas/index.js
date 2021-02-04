@@ -17,7 +17,7 @@ export default function Home() {
 
     const genre = ModelGenre();
     const [data, setData] = useState(null);
-   
+
     useEffect(async () => {
         let idea_ref = firebase.database().ref('ideas');
         idea_ref.on('value', (snapshot) => {
@@ -44,8 +44,12 @@ export default function Home() {
                 <MenuNavbar />
 
                 <div className="uk-container">
-                    <div className="uk-flex uk-flex-right uk-margin-bottom">
-                        <button className="uk-button uk-button-default uk-button-large" type="button">Escrever ideia</button>
+                    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky" className="uk-width-1-1 uk-margin-bottom">
+                        <nav class="uk-navbar-container uk-width-1-1" uk-navbar="dropbar: true;">
+                            <div className="uk-flex uk-flex-right uk-width-1-1">
+                                <button className="uk-button uk-button-large uk-width-1-1" type="button">Escrever ideia</button>
+                            </div>
+                        </nav>
                     </div>
 
                     <Write />
@@ -81,16 +85,21 @@ export default function Home() {
                             ))}
                         </div>
 
-                        <style jsx>{`
-                .wrap-overflow {
-                    white-space: nowrap;  
-                    text-overflow: ellipsis;
-                    width: 100%;
-                    overflow: hidden;  
-                }
-            `}</style>
-                    </div>
+                        <a className="uk-button uk-button-primary" href="#" uk-scroll>Scroll down</a>
 
+                    </div>
+                    <style jsx>{`
+                        .wrap-overflow {
+                            white-space: nowrap;  
+                            text-overflow: ellipsis;
+                            width: 100%;
+                            overflow: hidden;  
+                        }
+                        .w-100 {
+                            width: 100%;
+                        }
+                    `}
+                    </style>
                 </div>
             </main>
 

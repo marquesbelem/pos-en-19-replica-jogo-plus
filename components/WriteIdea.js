@@ -63,6 +63,7 @@ const WriteIdea = () => {
     };
 
     return (
+        
         <div uk-dropdown="mode: click; pos: bottom-justify" className="ui-flex">
             <div className="uk-card uk-card-body">
                 <form onSubmit={handleSubmit}>
