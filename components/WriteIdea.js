@@ -91,6 +91,7 @@ const WriteIdea = () => {
                 UIkit.notification('Erro no envio da ideia, tente novamente!', 'danger');
             });
 
+        //Todo: Remover
         console.log(data);
 
         UIkit.dropdown('.uk-dropdown', {

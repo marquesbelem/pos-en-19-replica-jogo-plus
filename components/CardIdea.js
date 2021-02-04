@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import firebase from "../config/firebase-admin"
+import ModelIdea from "../config/data-idea"
 
 const CardIdea = () => {
 
@@ -48,36 +49,12 @@ const CardIdea = () => {
 
     let idea_ref = firebase.database().ref('ideas');
 
-    /*idea_ref.on("child_added", function (snapshot) {
-        const idea = {
-            id: snapshot.key,
-            title: snapshot.val().title,
-            content: snapshot.val().content,
-            createdate: snapshot.val().dateFormatada,
-            category: snapshot.val().category,
-            comments: snapshot.val().comments
-        }
-
-        data.push(idea);
-        console.log(data);
-
-    }, function (errorObject) {
-        UIkit.notification('Erro no servidor!', 'danger');
-        console.log("The read failed: " + errorObject.code);
-    });*/
     idea_ref.on('value', (snapshot) => {
         snapshot.forEach((childSnapshot) => {
-            const idea = {
-                id: childSnapshot.key,
-                title: childSnapshot.val().title,
-                content: childSnapshot.val().content,
-                createdate: childSnapshot.val().dateFormatada,
-                category: childSnapshot.val().category,
-                comments: childSnapshot.val().comments
-            }
-    
-            data.push(idea);
+            data.push(ModelIdea(childSnapshot.val(),childSnapshot.key));
         });
+
+        //Todo: Remover 
         console.log(data);
       });
 

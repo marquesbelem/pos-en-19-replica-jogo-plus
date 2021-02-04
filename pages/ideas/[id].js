@@ -10,6 +10,7 @@ import UIkit from "uikit";
 import CommentCard from '../../components/CommentCard'
 import Router from 'next/router'
 import firebase from "../../config/firebase-admin"
+import ModelIdea from "../../config/data-idea"
 
 DetailIdea.getInitialProps = ({ query }) => {
     return {
@@ -23,16 +24,11 @@ export default function DetailIdea(props) {
 
     useEffect(async () => {
         let idea_ref = firebase.database().ref('/ideas/' + props.id);
+
         idea_ref.once('value').then((snapshot) => {
-            const idea = {
-                id: snapshot.key,
-                title: snapshot.val().title,
-                content: snapshot.val().content,
-                createdate: snapshot.val().dateFormatada,
-                category: snapshot.val().category,
-                comments: snapshot.val().comments
-            }
-            setResponse(idea);
+
+            setResponse(ModelIdea(snapshot.val(),snapshot.key));
+
         }, function (errorObject) {
             UIkit.notification('Erro no servidor!', 'danger');
             console.log("The read failed: " + errorObject.code);
@@ -80,13 +76,15 @@ export default function DetailIdea(props) {
             id: response.id,
             title: response.title,
             content: response.content,
-            createdate: 'response.dateFormatada',
+            createdate: response.createdate,
             category: response.category,
             comments: comments
         }
 
         let idea_ref = firebase.database().ref('/ideas/' + response.id);
+
         idea_ref.update(updateData).then(() => {
+
             UIkit.notification('Seu comentario foi enviado com sucesso!', 'success');
 
         }, function (errorObject) {
