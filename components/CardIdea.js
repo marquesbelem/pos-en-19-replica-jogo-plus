@@ -48,7 +48,7 @@ const CardIdea = () => {
 
     let idea_ref = firebase.database().ref('ideas');
 
-    idea_ref.on("child_added", function (snapshot) {
+    /*idea_ref.on("child_added", function (snapshot) {
         const idea = {
             id: snapshot.key,
             title: snapshot.val().title,
@@ -64,7 +64,22 @@ const CardIdea = () => {
     }, function (errorObject) {
         UIkit.notification('Erro no servidor!', 'danger');
         console.log("The read failed: " + errorObject.code);
-    });
+    });*/
+    idea_ref.on('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            const idea = {
+                id: childSnapshot.key,
+                title: childSnapshot.val().title,
+                content: childSnapshot.val().content,
+                createdate: childSnapshot.val().dateFormatada,
+                category: childSnapshot.val().category,
+                comments: childSnapshot.val().comments
+            }
+    
+            data.push(idea);
+        });
+        console.log(data);
+      });
 
     if (!data) {
         return (
@@ -78,15 +93,15 @@ const CardIdea = () => {
     return (
         <div uk-filter="target: .js-filter">
             <ul className="uk-subnav uk-subnav-pill">
-                <li className="uk-active" uk-filter-control="true"><a href="#">All</a></li>
+                <li className="uk-active" uk-filter-control="group: fill"><a href="#">All</a></li>
                 {genre.map((g) => (
-                    <li key={g.id} uk-filter-control={'.' + g.title}><a href="#">{g.title}</a></li>
+                    <li key={g.id} uk-filter-control={'filter: [fill=' + g.title + ']; group: fill'}><a href="#">{g.title}</a></li>
                 ))}
             </ul>
             <div className="js-filter">
                 {data.map((idea) => (
 
-                    <div className={idea.category ? idea.category : " "}>
+                    <div fill={idea.category ? idea.category : " "}>
                         <div className="uk-card uk-card-default uk-card-hover uk-card-body uk-margin-bottom"
                             key={idea.id}>
                             <span class="uk-label">{idea.category ? idea.category : " "}</span>
