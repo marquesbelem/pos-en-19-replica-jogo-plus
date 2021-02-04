@@ -1,53 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import UIkit from "uikit";
 import firebase from "../config/firebase-admin"
-import Router from 'next/router'
+import ModelGenre from "../config/data-genre"
 
 const WriteIdea = () => {
 
-    const genre = [
-        {
-            id: 0, 
-            title: 'Ação'
-        },
-        {
-            id: 1, 
-            title: 'Aventura'
-        },
-         {
-            id: 2, 
-            title: 'Esporte'
-        },
-        {
-            id: 3, 
-            title: 'Estratégia'
-        },
-        {
-            id: 4, 
-            title: 'Simulação'
-        },
-        {
-            id: 5, 
-            title: 'Moba'
-        },
-        {
-            id: 6, 
-            title: 'RPG'
-        },
-        {
-            id: 7, 
-            title: 'FPS'
-        },
-        {
-            id: 8, 
-            title: 'Outros'
-        }
-    ]
+    const genre = ModelGenre();
 
     let date = new Date();
     let dateFormatada = ((date.getDate())) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear();
 
-    const [msgValidation, setMsgValidation] = useState(null);
+    let msgValidation = '';
 
     const [data, setData] = useState({
         title: '',
@@ -68,16 +31,16 @@ const WriteIdea = () => {
         e.preventDefault();
 
         if (data.content.length <= 0 && data.title.length <= 0) {
-            setMsgValidation("Campos obrigatórios.");
+            msgValidation = "Campos obrigatórios.";
             return;
         } else if (data.content.length <= 0) {
-            setMsgValidation("Campo descrição é obrigatório.");
+            msgValidation = "Campo descrição é obrigatório.";
             return;
         } else if (data.title.length <= 0) {
-            setMsgValidation("Campo título é obrigatório.");
+            msgValidation = "Campo título é obrigatório.";
             return;
         } else {
-            setMsgValidation("");
+            msgValidation ="";
         }
 
         let idea_ref = firebase.database().ref('ideas');
@@ -116,9 +79,9 @@ const WriteIdea = () => {
                     <p className="uk-margin-bottom uk-text-dark uk-text-right"><span>Limite de 300 caracteres.</span></p>
 
                     <label>Qual gênero mais se encaixa na sua ideia?</label>
-                   <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                   <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                         {genre.map((g) => (
-                            <label key={g.id}><input class="uk-radio" type="radio" name="category"
+                            <label key={g.id}><input className="uk-radio" type="radio" name="category"
                                 value={g.title}
                                 onChange={handleChange} /> {g.title}</label>
                         ))}
