@@ -90,7 +90,8 @@ export default function DetailIdea(props) {
         idea_ref.update(updateData).then(() => {
 
             UIkit.notification('Seu comentario foi enviado com sucesso!', 'success');
-
+            setComment({content: ' '}); 
+            
         }, function (errorObject) {
             UIkit.notification('Erro no envio do comentario, tente novamente!', 'danger');
         });
