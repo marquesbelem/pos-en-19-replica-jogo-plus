@@ -119,13 +119,12 @@ export default function DetailIdea(props) {
     return (
         <div>
             <HeadCustom />
-            <main>
 
                 <MenuNavbar />
 
                 <div className="uk-container">
                     <div className="uk-card uk-card-default uk-card-body">
-                        <span class="uk-label">{response.category ? response.category : " "}</span>
+                        <span className="uk-label">{response.category ? response.category : " "}</span>
                         <h1 className="uk-text-center">{FilterWords(response.title)}</h1>
                         <p>{FilterWords(response.content)}</p>
                         <hr className="uk-divider-icon"></hr>
@@ -151,11 +150,33 @@ export default function DetailIdea(props) {
 
                     </div>
                 </div>
-            </main>
 
-            <footer>
+                <style jsx>{`
 
-            </footer>
+                        .uk-button-default {
+                            background-color: #000;;
+                            color: #fff;
+                        }
+          
+                        .uk-button-default:focus, .uk-button-default:hover
+                        {
+                          background-color: #ffc107;
+                          color: #333;
+                          border-color: #b2b2b2;
+                        }
+          
+                        .ptb-70 {
+                          padding-bottom: 80px;
+                          padding-top: 80px;
+                        }
+          
+                        .uk-label {
+                            background-color: #ffc107;
+                            color: #000;
+                        }
+
+                    `}
+            </style>
         </div>
     )
 }
