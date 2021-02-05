@@ -26,6 +26,18 @@ const WarningRules = () => {
                     </ul>
                 </div>
             </div>
+
+            <style jsx global>{`
+              .uk-modal-dialog {
+                background-color: #607d8b;
+                color: #ffff;
+              }
+
+              .uk-modal-title {
+                color: #ffff;
+              }
+         `}
+      </style>
         </div>
     )
 }

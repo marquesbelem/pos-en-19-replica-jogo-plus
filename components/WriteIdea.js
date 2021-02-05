@@ -40,7 +40,7 @@ const WriteIdea = () => {
             msgValidation = "Campo título é obrigatório.";
             return;
         } else {
-            msgValidation ="";
+            msgValidation = "";
         }
 
         let idea_ref = firebase.database().ref('ideas');
@@ -48,7 +48,7 @@ const WriteIdea = () => {
         idea_ref.push(data)
             .then(function () {
                 UIkit.notification('Sua ideia foi enviada com sucesso!', 'success');
-               // Router.reload(window.location.pathname);
+                // Router.reload(window.location.pathname);
             })
             .catch(function (error) {
                 UIkit.notification('Erro no envio da ideia, tente novamente!', 'danger');
@@ -63,36 +63,58 @@ const WriteIdea = () => {
     };
 
     return (
-        
-        <div uk-dropdown="mode: click; pos: bottom-justify" className="ui-flex">
-            <div className="uk-card uk-card-body">
-                <form onSubmit={handleSubmit}>
+   
+            <div uk-dropdown="mode: click; pos: bottom-justify" className="ui-flex w-100">
+                <div className="uk-card uk-card-body">
+                    <form onSubmit={handleSubmit}>
 
-                    <input className="uk-input uk-margin-bottom" placeholder="Título" type="text"
-                        name="title" value={data.title} onChange={handleChange} />
+                        <input className="uk-input uk-margin-bottom" placeholder="Título" type="text"
+                            name="title" value={data.title} onChange={handleChange} />
 
-                    <textarea className="uk-textarea" rows="5" placeholder="Descrição ..." maxLength="300" type="text " name="content"
-                        value={data.content}
-                        onChange={handleChange} />
+                        <textarea className="uk-textarea" rows="5" placeholder="Descrição ..." maxLength="300" type="text " name="content"
+                            value={data.content}
+                            onChange={handleChange} />
 
-                    <span className="uk-text-danger uk-text-left uk-margin-bottom">{msgValidation}</span>
+                        <span className="uk-text-danger uk-text-left uk-margin-bottom">{msgValidation}</span>
 
-                    <p className="uk-margin-bottom uk-text-dark uk-text-right"><span>Limite de 300 caracteres.</span></p>
+                        <p className="uk-margin-bottom uk-text-dark uk-text-right"><span>Limite de 300 caracteres.</span></p>
 
-                    <label>Qual gênero mais se encaixa na sua ideia?</label>
-                   <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                        {genre.map((g) => (
-                            <label key={g.id}><input className="uk-radio" type="radio" name="category"
-                                value={g.title}
-                                onChange={handleChange} /> {g.title}</label>
-                        ))}
-                    </div> 
+                        <label>Qual gênero mais se encaixa na sua ideia?</label>
+                        <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                            {genre.map((g) => (
+                                <label key={g.id}><input className="uk-radio" type="radio" name="category"
+                                    value={g.title}
+                                    onChange={handleChange} /> {g.title}</label>
+                            ))}
+                        </div>
 
-                    <button className="uk-button uk-button-default" type="submit" >Enviar</button>
-                </form>
+                        <button className="uk-button uk-button-default bt-enviar" type="submit" >Enviar</button>
+                    </form>
+                </div>
+
+                <style jsx>{`
+                        .w-100 {
+                            width: 100% !important;
+                        }
+
+                        .bt-enviar {
+                            background-color: #ffc107;
+                            color: #333;
+                            border-color: #b2b2b2;
+                        }
+
+                        .bt-enviar:focus, .bt-enviar:hover {
+                            background-color: #000;;
+                            color: #fff;
+                        }
+
+
+                        .uk-checkbox:checked, .uk-checkbox:indeterminate, .uk-radio:checked {
+                            background-color: #20558b;
+                        }
+                    `}
+            </style>
             </div>
-        </div>
-
     )
 }
 
