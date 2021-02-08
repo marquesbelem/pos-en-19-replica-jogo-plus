@@ -11,7 +11,6 @@ export default function Home() {
     <div>
       <HeadCustom />
 
-
       <MenuNavbar />
 
       <div className="uk-container uk-margin-top ptb-70">
