@@ -15,7 +15,7 @@ export default function Home() {
       <MenuNavbar />
 
       <div className="uk-container uk-margin-top ptb-70">
-        <div className="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-flex uk-flex-wrap uk-flex-center" uk-grid>
+        <div className="uk-child-width-1-3@m  uk-flex uk-flex-wrap uk-flex-center" uk-grid="true">
           <div className="uk-card uk-card-hover uk-card-default uk-card-body uk-animation-slide-bottom uk-margin-right uk-margin-top">
             <h3 className="uk-card-title">Plataforma que</h3>
             <p>centraliza ideias de jogos para programadores que tem dificuldade em criar ideias ou não saber por onde começar. </p>
@@ -44,7 +44,7 @@ export default function Home() {
 
       <Warning />
 
-      <div className="uk-container uk-margin-top uk-position-bottom">
+      <div className="uk-container uk-margin-top">
         <div>Ícones feitos por <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a></div>
       </div>
 

@@ -19,7 +19,7 @@ const CommentCard = ({ comments }) => {
                         <header className="uk-comment-header">
                             <div className="uk-grid-medium uk-flex-middle" uk-grid="true">
                                 <div className="uk-width-expand">
-                                    <h4 className="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Desconhecido</a></h4>
+                                    <h4 className="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">{comment.displayName}</a></h4>
                                     <ul className="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
                                         <li>{comment.datePublish}</li>
                                     </ul>
