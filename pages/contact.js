@@ -27,12 +27,17 @@ export default function Home() {
               <div class="uk-card-body">
                 <p>
                   <Link href="https://www.linkedin.com/in/camila-marques-belem-9438a5100/">
-                    <a target="_blank">Linkedin</a>
+                    <a target="_blank">Linkedin.</a>
                   </Link>
                 </p>
                 <p>
                   <Link href="https://marquesbelem.github.io/">
-                    <a target="_blank">Portfólio</a>
+                    <a target="_blank">Portfólio.</a>
+                  </Link>
+                </p>
+                <p>
+                  <Link href="https://www.canva.com/design/DAEVS3CQI1o/xSVq7ED19sU01XbXsyHK0w/view">
+                    <a target="_blank">Mais informações sobre o projeto.</a>
                   </Link>
                 </p>
               </div>
