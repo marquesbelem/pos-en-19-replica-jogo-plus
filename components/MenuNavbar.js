@@ -14,9 +14,9 @@ const MenuNavbar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/ideas/">
-                                <a>Ideais</a>
-                            </Link>
+                           {/*  <Link href="/ideas/"> */}
+                                <a  uk-toggle="target: #modal-rules">Ideais</a>
+                           {/*  </Link> */}
                         </li>
                         <li>
                             <Link href="/contact">
