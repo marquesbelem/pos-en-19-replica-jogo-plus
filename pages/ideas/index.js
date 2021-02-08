@@ -20,7 +20,7 @@ export default function Home() {
 
     useEffect(async () => {
         let idea_ref = firebase.database().ref('ideas');
-        
+
         /*idea_ref.on('value', (snapshot) => {
             setData(Object.values(snapshot.val()));
             console.log("DAta: " + JSON.stringify(data[0]));
@@ -28,16 +28,16 @@ export default function Home() {
             console.log(" snapshot.key>>>" +  snapshot.key)
         });*/
 
-        idea_ref.once('value', (snapshot) => {
-            let _idea = []; 
+        idea_ref.on('value', (snapshot) => {
+            let _idea = [];
 
             snapshot.forEach((childSnapshot) => {
-                _idea.push(ModelIdea(childSnapshot.val(),childSnapshot.key))    
-                
+                _idea.push(ModelIdea(childSnapshot.val(), childSnapshot.key))
+
             });
 
             setData(_idea);
-          });
+        });
     }, []);
 
     if (!data) {
@@ -46,16 +46,8 @@ export default function Home() {
                 <HeadCustom />
                 <MenuNavbar />
 
-                <div className="uk-container uk-padding">
-                    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky" className="uk-margin-bottom">
-                        <nav className="uk-navbar-container  uk-navbar-transparent" uk-navbar="dropbar: true;">
-                            <div className="uk-flex">
-                                <button className="uk-button uk-button-large btn-idea" type="button">Escrever ideia</button>
-                                <Write />
-                            </div>
-                        </nav>
-                    </div>
-                </div>
+                <button className="uk-button uk-button-large btn-idea" type="button">Escrever ideia</button>
+                <Write />
 
                 <div className="uk-container">
                     <div className="uk-text-center">
@@ -63,7 +55,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 
     return (

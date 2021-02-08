@@ -3,6 +3,7 @@ import UIkit from "uikit";
 import firebase from "../config/firebase-client"
 import ModelGenre from "../config/data-genre"
 import { useAuth } from "../config/auth";
+import Router from 'next/router'
 
 const WriteIdea = () => {
     const { user } = useAuth();
@@ -59,14 +60,11 @@ const WriteIdea = () => {
         idea_ref.push(data)
             .then(function () {
                 UIkit.notification('Sua ideia foi enviada com sucesso!', 'success');
-                // Router.reload(window.location.pathname);
+                Router.reload(window.location.pathname);
             })
             .catch(function (error) {
                 UIkit.notification('Erro no envio da ideia, tente novamente!', 'danger');
             });
-
-        //Todo: Remover
-        console.log(data);
 
         UIkit.dropdown('.uk-dropdown', {
             delayHide: 2
