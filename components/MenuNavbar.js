@@ -48,6 +48,7 @@ const MenuNavbar = () => {
 
                     .entrar {
                         background-color:#ffff;
+                        color:black!important;
                     }
 
                     .cadastrar  {

@@ -1,7 +1,7 @@
 const HeadCustom = () => {
     return (
         <div>
-            <title>Replica esse jogo</title>
+            <title>Faz esse jogo aqui!</title>
             <link rel="icon" href="/favicon.ico" />
         </div>
     )

@@ -7,12 +7,10 @@ import MenuNavbar from '../../components/MenuNavbar'
 import HeadCustom from '../../components/HeadCustom'
 import firebase from "../../config/firebase-client"
 import "firebase/auth"
-import { useRouter } from 'next/router'
 import UIkit from "uikit"
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export default function Home() {
-
     const [data, setData] = useState("");
     const router = useRouter();
 
@@ -26,39 +24,29 @@ export default function Home() {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        await firebase.auth().signInWithEmailAndPassword(data.email, data.pass)
+        await firebase.auth().sendPasswordResetEmail(data.email)
             .then(function () {
-                //window.location.href =  '/ideas/';
-                router.push('/ideas/');
-                UIkit.notification("Login feito com sucesso!", 'success');
+                UIkit.notification("Uma mensagem foi enviada para o email solicitado", 'success');
+                router.push('/login/access');
             }).catch(function (error) {
                 UIkit.notification(error.message, 'danger');
             })
     };
-
 
     return (
         <div>
             <HeadCustom />
             <MenuNavbar />
             <div className="uk-container uk-padding">
-                <div className="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-flex uk-flex-center uk-flex-middle">
+                <div className="uk-flex uk-flex-center uk-flex-middle">
                     <div className="uk-card uk-card-default uk-card-body uk-text-center">
-                        <h3 className="uk-card-title">Login</h3>
+                        <h3 className="uk-card-title">Redefinir senha</h3>
                         <form onSubmit={handleSubmit}>
 
                             <input className="uk-input uk-margin-bottom" placeholder="Email" type="email"
                                 name="email" value={data.email} onChange={handleChange} required />
 
-                            <input className="uk-input uk-margin-bottom" placeholder="Senha" type="password"
-                                name="pass" value={data.pass} onChange={handleChange} required />
-
-                            <button className="uk-button uk-button-default bt-enviar" type="submit" >Entrar</button>
-                            <p>
-                                <Link href="/login/reset-password">
-                                    <a>Esqueceu a senha?</a>
-                                </Link>
-                            </p>
+                            <button className="uk-button uk-button-default bt-enviar" type="submit" >Enviar</button>
                         </form>
                     </div>
                 </div>

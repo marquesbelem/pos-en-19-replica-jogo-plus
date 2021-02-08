@@ -21,8 +21,6 @@ const WriteIdea = () => {
     let date = new Date();
     let dateFormatada = ((date.getDate())) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear();
 
-    let msgValidation = '';
-
     const [data, setData] = useState({
         title: '',
         content: '',
@@ -41,19 +39,6 @@ const WriteIdea = () => {
 
     const handleSubmit = async e => {
         e.preventDefault();
-
-        if (data.content.length <= 0 && data.title.length <= 0) {
-            msgValidation = "Campos obrigatórios.";
-            return;
-        } else if (data.content.length <= 0) {
-            msgValidation = "Campo descrição é obrigatório.";
-            return;
-        } else if (data.title.length <= 0) {
-            msgValidation = "Campo título é obrigatório.";
-            return;
-        } else {
-            msgValidation = "";
-        }
 
         let idea_ref = firebase.database().ref('ideas');
 
@@ -78,13 +63,11 @@ const WriteIdea = () => {
                     <form onSubmit={handleSubmit}>
 
                         <input className="uk-input uk-margin-bottom" placeholder="Título" type="text"
-                            name="title" value={data.title} onChange={handleChange} />
+                            name="title" value={data.title} onChange={handleChange} required />
 
                         <textarea className="uk-textarea" rows="5" placeholder="Descrição ..." maxLength="300" type="text " name="content"
                             value={data.content}
-                            onChange={handleChange} />
-
-                        <span className="uk-text-danger uk-text-left uk-margin-bottom">{msgValidation}</span>
+                            onChange={handleChange} required/>
 
                         <p className="uk-margin-bottom uk-text-dark uk-text-right"><span>Limite de 300 caracteres.</span></p>
 
