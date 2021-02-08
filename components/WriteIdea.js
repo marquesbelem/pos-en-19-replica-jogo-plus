@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import UIkit from "uikit";
-import firebase from "../config/firebase-admin"
+import firebase from "../config/firebase-client"
 import ModelGenre from "../config/data-genre"
 
 const WriteIdea = () => {

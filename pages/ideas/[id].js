@@ -8,7 +8,7 @@ import HeadCustom from '../../components/HeadCustom'
 import React, { useState, useEffect } from 'react'
 import UIkit from "uikit";
 import CommentCard from '../../components/CommentCard'
-import firebase from "../../config/firebase-admin"
+import firebase from "../../config/firebase-client"
 import ModelIdea from "../../config/data-idea"
 import FilterWords from "../../config/moderation-words"
 import GenereteId from "../../config/generate-id"

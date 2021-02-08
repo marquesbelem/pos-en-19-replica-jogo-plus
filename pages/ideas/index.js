@@ -8,8 +8,7 @@ import Write from '../../components/WriteIdea'
 import HeadCustom from '../../components/HeadCustom'
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import firebase from "../../config/firebase-admin"
-import ModelIdea from "../../config/data-idea"
+import firebase from "../../config/firebase-client"
 import FilterWords from "../../config/moderation-words"
 import ModelGenre from "../../config/data-genre"
 
@@ -33,14 +32,11 @@ export default function Home() {
         );
     }
 
-
-
     return (
         <div>
             <HeadCustom />
-
-
             <MenuNavbar />
+
             <div className="uk-container uk-padding">
                 <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky" className="uk-margin-bottom">
                     <nav class="uk-navbar-container" uk-navbar="dropbar: true;">

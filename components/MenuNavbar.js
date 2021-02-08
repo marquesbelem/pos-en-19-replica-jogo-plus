@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import MenuAuth from "../components/MenuAuth";
 
 const MenuNavbar = () => {
+
     return (
         <div>
             <nav className="uk-navbar-container">
@@ -22,6 +24,7 @@ const MenuNavbar = () => {
                             </Link>
                         </li>
                     </ul>
+                    <MenuAuth />
                 </div>
             </nav>
 
@@ -35,8 +38,25 @@ const MenuNavbar = () => {
                         color:#ffff;  
                     }
 
+                  .off {
+                        background-color:#ffc107;
+                    }
+
+                    .user {
+                        color:#ffff;
+                    }
+
+                    .entrar {
+                        background-color:#ffff;
+                    }
+
+                    .cadastrar  {
+                        background-color:#20558b;
+                        color:#ffff;
+                    }
+
                 `}
-             </style>
+            </style>
         </div>
     )
 }
