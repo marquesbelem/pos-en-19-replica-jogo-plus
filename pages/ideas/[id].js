@@ -44,8 +44,6 @@ export default function DetailIdea(props) {
         });
     }, []);
 
-    const [msgValidation, setMsgValidation] = useState(null);
-
     let date = new Date();
     let dateFormatada = ((date.getDate())) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear();
 
@@ -67,15 +65,6 @@ export default function DetailIdea(props) {
 
     const handleSubmit = async e => {
         e.preventDefault();
-
-        if (comment.content.length <= 0) {
-            setMsgValidation("Campo obrigatório.");
-            return;
-        }
-        else {
-            setMsgValidation("");
-        }
-
 
         let comments = [];
 
@@ -150,9 +139,7 @@ export default function DetailIdea(props) {
 
                                 <textarea className="uk-textarea" rows="5" placeholder="Escreve seu comentário ..." maxLength="300" type="text " name="content"
                                     value={comment.content}
-                                    onChange={handleChange} />
-
-                                <span className="uk-text-danger uk-text-left uk-margin-bottom">{msgValidation}</span>
+                                    onChange={handleChange} required />
 
                                 <p className="uk-margin-bottom uk-text-dark uk-text-right"><span>Limite de 300 caracteres.</span></p>
                                 <div className="uk-flex uk-flex-right uk-margin-bottom">

@@ -45,13 +45,13 @@ export default function Home() {
             <MenuNavbar />
             <div className="uk-container uk-padding">
                 <div className="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-flex uk-flex-center uk-flex-middle">
-                    <div className="uk-card uk-card-primary uk-card-body">
+                    <div className="uk-card uk-card-primary uk-card-body uk-text-center">
                         <h3 className="uk-card-title">Cadastrar</h3>
                         <form onSubmit={handleSubmit}>
                             <input className="uk-input uk-margin-bottom" placeholder="Nome" type="text"
                                 name="displayName" value={data.displayName} onChange={handleChange} />
 
-                            <input className="uk-input uk-margin-bottom" placeholder="Email" type="text"
+                            <input className="uk-input uk-margin-bottom" placeholder="Email" type="email"
                                 name="email" value={data.email} onChange={handleChange} required />
 
                             <input className="uk-input uk-margin-bottom" placeholder="Senha" type="password"
