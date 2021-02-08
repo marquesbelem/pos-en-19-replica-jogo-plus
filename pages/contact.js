@@ -1,63 +1,45 @@
-import { useState } from 'react';
-import axios from 'axios';
+import MenuNavbar from '../components/MenuNavbar'
+import HeadCustom from '../components/HeadCustom'
+import Link from 'next/link'
 
-const Home = ({ allCategories, errorCategories }) => {
-  const [modifiedData, setModifiedData] = useState({
-    title: '',
-    content: ''
-  });
-  const [errorRestaurants, setErrorRestaurants] = useState(null);
-
-  const handleChange = ({ target: { name, value } }) => {
-    setModifiedData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post('/api/postIdeas', modifiedData);
-      console.log(response);
-    } catch (error) {
-      setErrorRestaurants(error);
-    }
-  };
+export default function Home() {
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <h3>Restaurants</h3>
-        <br />
-        <label>
-          Name:
-          <input type="text" name="title" value={modifiedData.title} onChange={handleChange} />
-        </label>
-        <label>
-          Description:
-          <input
-            type="text"
-            name="content"
-            value={modifiedData.content}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <button type="submit">Submit</button>
-      </form>
+      <HeadCustom />
+      <MenuNavbar />
+
+      <div className="uk-container uk-padding">
+        <div className="uk-container uk-margin-top ptb-70">
+          <div className="uk-child-width-1-2@m uk-flex uk-flex-wrap uk-flex-center" uk-grid="true">
+            <div className="uk-card uk-card-default uk-card-body uk-margin-right uk-margin-top">
+              <div class="uk-card-header">
+                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                  <p>Essa plataforma é um MVP desenvolvida para o projeto final do curso de MBA Engenharia de Software.</p>
+                  <div class="uk-width-auto">
+                    <img src="profile.png" />
+                  </div>
+                  <div class="uk-width-expand uk-margin-top">
+                    <h3 class="uk-card-title uk-margin-remove-bottom">Camila Marques Belem</h3>
+                    <p class="uk-text-meta uk-margin-remove-top">Desenvoldora Full Stack do projeto</p>
+                  </div>
+                </div>
+              </div>
+              <div class="uk-card-body">
+                <p>
+                  <Link href="https://www.linkedin.com/in/camila-marques-belem-9438a5100/">
+                    <a target="_blank">Linkedin</a>
+                  </Link>
+                </p>
+                <p>
+                  <Link href="https://marquesbelem.github.io/">
+                    <a target="_blank">Portfólio</a>
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  );
-};
-
-Home.getInitialProps = async ctx => {
-  try {
-    const res = await axios.get('http://localhost:1337/categories');
-    const allCategories = res.data;
-    return { allCategories };
-  } catch (errorCategories) {
-    return { errorCategories };
-  }
-};
-
-export default Home;
+  )
+}
