@@ -12,6 +12,7 @@ import firebase from "../../config/firebase-client"
 import ModelIdea from "../../config/data-idea"
 import FilterWords from "../../config/moderation-words"
 import GenereteId from "../../config/generate-id"
+import { useAuth } from "../../config/auth";
 
 DetailIdea.getInitialProps = ({ query }) => {
     return {
@@ -20,13 +21,22 @@ DetailIdea.getInitialProps = ({ query }) => {
 }
 
 export default function DetailIdea(props) {
+    const { user } = useAuth();
+    let displayNameComment = ''; 
+
+    if(user) {
+        const index = user.email.indexOf("@");
+        displayNameComment = user.email.substr(0,index);
+    } else {
+        displayNameComment = "Desconhecido";
+    }
 
     const [response, setResponse] = useState(null);
 
     useEffect(async () => {
         
         window.history.pushState({}, null, '/ideas');
-
+        console.log("ide: " + props.id);
         let idea_ref = firebase.database().ref('/ideas/' + props.id);
 
         idea_ref.on('value', (snapshot) => {
@@ -42,13 +52,16 @@ export default function DetailIdea(props) {
     const [comment, setComment] = useState({
         id: GenereteId(),
         content: '',
-        datePublish: dateFormatada
+        datePublish: dateFormatada,
+        displayName: displayNameComment
     });
 
     const handleChange = ({ target: { name, value } }) => {
         setComment(prev => ({
-            ...prev,
+            id: GenereteId(),
             [name]: value,
+            datePublish: dateFormatada,
+            displayName: displayNameComment
         }));
     };
 
@@ -78,7 +91,8 @@ export default function DetailIdea(props) {
             content: response.content,
             createdate: response.createdate,
             category: response.category,
-            comments: comments
+            comments: comments,
+            displayName: response.displayName
         }
 
         let idea_ref = firebase.database().ref('/ideas/' + response.id);
@@ -127,6 +141,7 @@ export default function DetailIdea(props) {
                         <span className="uk-label">{response.category ? response.category : " "}</span>
                         <h1 className="uk-text-center">{FilterWords(response.title)}</h1>
                         <p>{FilterWords(response.content)}</p>
+                        <span>Escrito por: {response.displayName}</span>
                         <hr className="uk-divider-icon"></hr>
                         <h2 className="uk-text-center">Comentários</h2>
 

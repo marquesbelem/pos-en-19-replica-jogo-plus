@@ -5,7 +5,8 @@ const DataIdea = (_data, key) => {
         content: _data.content,
         createdate: _data.createdate,
         category: _data.category,
-        comments: _data.comments
+        comments: _data.comments,
+        displayName: _data.displayName
     }
 
     return idea; 

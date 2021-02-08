@@ -7,6 +7,7 @@ const MenuAuth = () => {
 
     const { user } = useAuth();
     const router = useRouter();
+    let displayName = ''; 
 
     const signOut = async e => {
         e.preventDefault();
@@ -34,15 +35,15 @@ const MenuAuth = () => {
         )
     }
     else {
-        console.log("menu auth: " + user);
-        console.log(" user.displayName: " + user.displayName);
-        console.log(" user.email : " + user.email);
+        const index = user.email.indexOf("@");
+        displayName = user.email.substr(0,index);
     }
+
     return (
         <div className="uk-navbar-right">
             <div className="uk-navbar-item">
                 <p className="user">Olá criador(a)</p>
-                <p className="user">{user.email}</p>
+                <p className="user">{displayName}</p>
             </div>
             <div className="uk-navbar-item">
                 <button className="uk-button off" onClick={signOut}>Sair</button>

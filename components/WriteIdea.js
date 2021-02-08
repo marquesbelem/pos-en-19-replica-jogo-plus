@@ -2,8 +2,18 @@ import React, { useState } from 'react'
 import UIkit from "uikit";
 import firebase from "../config/firebase-client"
 import ModelGenre from "../config/data-genre"
+import { useAuth } from "../config/auth";
 
 const WriteIdea = () => {
+    const { user } = useAuth();
+    let displayName = ''; 
+
+    if(user) {
+        const index = user.email.indexOf("@");
+        displayName = user.email.substr(0,index);
+    } else {
+        displayName = "Desconhecido";
+    }
 
     const genre = ModelGenre();
 
@@ -17,7 +27,8 @@ const WriteIdea = () => {
         content: '',
         createdate: dateFormatada,
         category: '',
-        comments: []
+        comments: [],
+        displayName: displayName
     });
 
     const handleChange = ({ target: { name, value } }) => {

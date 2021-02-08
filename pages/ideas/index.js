@@ -11,6 +11,7 @@ import Link from 'next/link'
 import firebase from "../../config/firebase-client"
 import FilterWords from "../../config/moderation-words"
 import ModelGenre from "../../config/data-genre"
+import ModelIdea from "../../config/data-idea"
 
 export default function Home() {
 
@@ -19,15 +20,48 @@ export default function Home() {
 
     useEffect(async () => {
         let idea_ref = firebase.database().ref('ideas');
-        idea_ref.on('value', (snapshot) => {
+        
+        /*idea_ref.on('value', (snapshot) => {
             setData(Object.values(snapshot.val()));
-        });
+            console.log("DAta: " + JSON.stringify(data[0]));
+            console.log( JSON.stringify(snapshot.val()))
+            console.log(" snapshot.key>>>" +  snapshot.key)
+        });*/
+
+        idea_ref.once('value', (snapshot) => {
+            let _idea = []; 
+
+            snapshot.forEach((childSnapshot) => {
+                _idea.push(ModelIdea(childSnapshot.val(),childSnapshot.key))    
+                
+            });
+
+            setData(_idea);
+          });
     }, []);
 
     if (!data) {
         return (
-            <div className="uk-text-center">
-                <span uk-spinner="ratio: 4.5"></span>
+            <div>
+                <HeadCustom />
+                <MenuNavbar />
+
+                <div className="uk-container uk-padding">
+                    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky" className="uk-margin-bottom">
+                        <nav className="uk-navbar-container  uk-navbar-transparent" uk-navbar="dropbar: true;">
+                            <div className="uk-flex">
+                                <button className="uk-button uk-button-large btn-idea" type="button">Escrever ideia</button>
+                                <Write />
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+                <div className="uk-container">
+                    <div className="uk-text-center">
+                        <span uk-spinner="ratio: 4.5"></span>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -39,7 +73,7 @@ export default function Home() {
 
             <div className="uk-container uk-padding">
                 <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky" className="uk-margin-bottom">
-                    <nav class="uk-navbar-container" uk-navbar="dropbar: true;">
+                    <nav className="uk-navbar-container  uk-navbar-transparent" uk-navbar="dropbar: true;">
                         <div className="uk-flex">
                             <button className="uk-button uk-button-large btn-idea" type="button">Escrever ideia</button>
                             <Write />
@@ -49,7 +83,7 @@ export default function Home() {
             </div>
 
             <div className="uk-container">
-             
+
                 <div uk-filter="target: .js-filter">
                     <ul className="uk-subnav uk-subnav-pill">
                         <li className="uk-active" uk-filter-control="group: fill"><a href="#">All</a></li>
@@ -85,7 +119,7 @@ export default function Home() {
 
 
             <div className="uk-text-right">
-                <a className="uk-button" href="#" uk-scroll >Topo</a>
+                <a className="uk-button" href="#" uk-scroll="true">Topo</a>
             </div>
 
             <style jsx>{`

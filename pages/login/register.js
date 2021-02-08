@@ -9,7 +9,6 @@ import firebase from "../../config/firebase-client"
 import "firebase/auth"
 import { useRouter } from 'next/router'
 import UIkit from "uikit"
-
 export default function Home() {
 
     const [data, setData] = useState("");
@@ -30,7 +29,7 @@ export default function Home() {
             return;
         }
 
-        await  firebase.auth().createUserWithEmailAndPassword(data.email, data.pass)
+        await firebase.auth().createUserWithEmailAndPassword(data.email, data.pass)
             .then(function () {
                 UIkit.notification("Cadastro feito com sucesso!", 'success');
                 router.push('/ideas/');
@@ -49,6 +48,8 @@ export default function Home() {
                     <div className="uk-card uk-card-primary uk-card-body">
                         <h3 className="uk-card-title">Cadastrar</h3>
                         <form onSubmit={handleSubmit}>
+                            <input className="uk-input uk-margin-bottom" placeholder="Nome" type="text"
+                                name="displayName" value={data.displayName} onChange={handleChange} />
 
                             <input className="uk-input uk-margin-bottom" placeholder="Email" type="text"
                                 name="email" value={data.email} onChange={handleChange} required />
