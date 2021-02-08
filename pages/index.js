@@ -14,7 +14,7 @@ export default function Home() {
       <MenuNavbar />
 
       <div className="uk-container uk-margin-top ptb-70">
-        <div className="uk-child-width-1-3@m  uk-flex uk-flex-wrap uk-flex-center" uk-grid="true">
+        <div className="uk-child-width-1-3@m uk-flex uk-flex-wrap uk-flex-center" uk-grid="true">
           <div className="uk-card uk-card-hover uk-card-default uk-card-body uk-animation-slide-bottom uk-margin-right uk-margin-top">
             <h3 className="uk-card-title">Plataforma que</h3>
             <p>centraliza ideias de jogos para programadores que tem dificuldade em criar ideias ou não saber por onde começar. </p>
