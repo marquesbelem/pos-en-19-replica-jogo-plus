@@ -20,14 +20,6 @@ export default function Home() {
 
     useEffect(async () => {
         let idea_ref = firebase.database().ref('ideas');
-
-        /*idea_ref.on('value', (snapshot) => {
-            setData(Object.values(snapshot.val()));
-            console.log("DAta: " + JSON.stringify(data[0]));
-            console.log( JSON.stringify(snapshot.val()))
-            console.log(" snapshot.key>>>" +  snapshot.key)
-        });*/
-
         idea_ref.on('value', (snapshot) => {
             let _idea = [];
 

@@ -36,7 +36,6 @@ export default function DetailIdea(props) {
     useEffect(async () => {
         
         window.history.pushState({}, null, '/ideas');
-        console.log("ide: " + props.id);
         let idea_ref = firebase.database().ref('/ideas/' + props.id);
 
         idea_ref.on('value', (snapshot) => {

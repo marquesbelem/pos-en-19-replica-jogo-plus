@@ -7,7 +7,6 @@ const WarningRules = () => {
 
     useEffect(() => {
         UIkit.util.on(document, 'hide', '#modal-rules', function() {
-            console.log('msg ...');
             router.push('/ideas/')
         });
       }, [])

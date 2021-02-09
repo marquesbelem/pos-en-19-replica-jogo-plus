@@ -22,7 +22,5 @@ export default function FourOhFour() {
                 </div>
             </div>
         </div>
-
-
     )
 }
