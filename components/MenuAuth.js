@@ -7,7 +7,7 @@ const MenuAuth = () => {
 
     const { user } = useAuth();
     const router = useRouter();
-    let displayName = ''; 
+    let displayName = '';
 
     const signOut = async e => {
         e.preventDefault();
@@ -20,33 +20,34 @@ const MenuAuth = () => {
             })
     };
 
-    if (!user) {
+    if (user) {
+        const index = user.email.indexOf("@");
+        displayName = user.email.substr(0, index);
+
         return (
             <div className="uk-navbar-right">
                 <div className="uk-navbar-item">
-                    <Link href="/login/access">
-                        <a className="uk-button entrar">Entrar</a>
+                    <Link href="/profile">
+                        <a className="user">Olá criador(a), {displayName}, acesse seu perfil</a>
                     </Link>
-                    <Link href="/login/register">
-                        <a className="uk-button cadastrar">Cadastrar</a>
-                    </Link>
+                </div>
+                <div className="uk-navbar-item">
+                    <button className="uk-button off" onClick={signOut}>Sair</button>
                 </div>
             </div>
         )
-    }
-    else {
-        const index = user.email.indexOf("@");
-        displayName = user.email.substr(0,index);
-    }
 
+    }
+    
     return (
         <div className="uk-navbar-right">
             <div className="uk-navbar-item">
-                <p className="user">Olá criador(a)</p>
-                <p className="user">{displayName}</p>
-            </div>
-            <div className="uk-navbar-item">
-                <button className="uk-button off" onClick={signOut}>Sair</button>
+                <Link href="/login/access">
+                    <a className="uk-button entrar">Entrar</a>
+                </Link>
+                <Link href="/login/register">
+                    <a className="uk-button cadastrar">Cadastrar</a>
+                </Link>
             </div>
         </div>
     )
