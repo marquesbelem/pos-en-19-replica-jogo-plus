@@ -17,9 +17,10 @@ export default function Home() {
 
     const genre = ModelGenre();
     const [data, setData] = useState(null);
-
-    useEffect(async () => {
-        let idea_ref = firebase.database().ref('ideas');
+    let count = 5; 
+    
+    const loadData = () => {
+        let idea_ref = firebase.database().ref('ideas').limitToFirst(count);
         idea_ref.on('value', (snapshot) => {
             let _idea = [];
 
@@ -30,6 +31,22 @@ export default function Home() {
 
             setData(_idea);
         });
+    };
+
+    const scrollLoad = () => {
+        if(window.pageYOffset + window.innerHeight >= document.body.clientHeight) 
+        {
+            count = count + 2;
+            loadData();
+        }
+    }
+
+    useEffect(async () => {
+        loadData();
+     
+        window.onscroll = () => {
+            scrollLoad();
+        }
     }, []);
 
     if (!data) {
@@ -63,9 +80,9 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="uk-container">
+            <div className="uk-container" >
 
-                <div uk-filter="target: .js-filter">
+                <div uk-filter="target: .js-filter" id="main">
                     <ul className="uk-subnav uk-subnav-pill">
                         <li className="uk-active" uk-filter-control="group: fill"><a href="#">All</a></li>
                         {genre.map((g) => (
