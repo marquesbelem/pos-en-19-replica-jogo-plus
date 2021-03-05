@@ -52,9 +52,9 @@ export default function Home() {
             <HeadCustom />
             <MenuNavbar />
 
-            <div className="uk-container uk-padding">
+            <div className="uk-container-expand uk-padding">
                 <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky" className="uk-margin-bottom">
-                    <nav className="uk-navbar-container  uk-navbar-transparent" uk-navbar="dropbar: true;">
+                    <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="dropbar: true;">
                         <div className="uk-flex">
                             <button className="uk-button uk-button-large btn-idea" type="button">Escrever ideia</button>
                             <Write />
@@ -104,6 +104,10 @@ export default function Home() {
             </div>
 
             <style jsx>{`
+
+                        .uk-navbar-sticky {
+                            margin-top: 10px;
+                        }
                         .wrap-overflow {
                             white-space: nowrap;  
                             text-overflow: ellipsis;
