@@ -17,17 +17,10 @@ export default function Home() {
 
     const genre = ModelGenre();
     const [data, setData] = useState(null);
-
-    useEffect(async () => {
-        let idea_ref = firebase.database().ref('ideas');
-
-        /*idea_ref.on('value', (snapshot) => {
-            setData(Object.values(snapshot.val()));
-            console.log("DAta: " + JSON.stringify(data[0]));
-            console.log( JSON.stringify(snapshot.val()))
-            console.log(" snapshot.key>>>" +  snapshot.key)
-        });*/
-
+    let count = 5; 
+    
+    const loadData = () => {
+        let idea_ref = firebase.database().ref('ideas').limitToFirst(count);
         idea_ref.on('value', (snapshot) => {
             let _idea = [];
 
@@ -38,6 +31,22 @@ export default function Home() {
 
             setData(_idea);
         });
+    };
+
+    const scrollLoad = () => {
+        if(window.pageYOffset + window.innerHeight >= document.body.clientHeight) 
+        {
+            count = count + 2;
+            loadData();
+        }
+    }
+
+    useEffect(async () => {
+        loadData();
+     
+        window.onscroll = () => {
+            scrollLoad();
+        }
     }, []);
 
     if (!data) {
@@ -45,9 +54,6 @@ export default function Home() {
             <div>
                 <HeadCustom />
                 <MenuNavbar />
-
-                <button className="uk-button uk-button-large btn-idea" type="button">Escrever ideia</button>
-                <Write />
 
                 <div className="uk-container">
                     <div className="uk-text-center">
@@ -63,9 +69,9 @@ export default function Home() {
             <HeadCustom />
             <MenuNavbar />
 
-            <div className="uk-container uk-padding">
+            <div className="uk-container-expand uk-padding">
                 <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky" className="uk-margin-bottom">
-                    <nav className="uk-navbar-container  uk-navbar-transparent" uk-navbar="dropbar: true;">
+                    <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="dropbar: true;">
                         <div className="uk-flex">
                             <button className="uk-button uk-button-large btn-idea" type="button">Escrever ideia</button>
                             <Write />
@@ -74,9 +80,9 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="uk-container">
+            <div className="uk-container" >
 
-                <div uk-filter="target: .js-filter">
+                <div uk-filter="target: .js-filter" id="main">
                     <ul className="uk-subnav uk-subnav-pill">
                         <li className="uk-active" uk-filter-control="group: fill"><a href="#">All</a></li>
                         {genre.map((g) => (
@@ -115,6 +121,10 @@ export default function Home() {
             </div>
 
             <style jsx>{`
+
+                        .uk-navbar-sticky {
+                            margin-top: 10px;
+                        }
                         .wrap-overflow {
                             white-space: nowrap;  
                             text-overflow: ellipsis;
