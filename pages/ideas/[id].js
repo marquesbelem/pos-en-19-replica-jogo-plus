@@ -130,6 +130,8 @@ export default function DetailIdea(props) {
                         <h1 className="uk-text-center">{FilterWords(response.title)}</h1>
                         <p>{FilterWords(response.content)}</p>
                         <span>Escrito por: {response.displayName}</span>
+                        <br></br>
+                        <span>Publicado em: {response.createdate}</span>
                         <hr className="uk-divider-icon"></hr>
                         <h2 className="uk-text-center">Comentários</h2>
 
