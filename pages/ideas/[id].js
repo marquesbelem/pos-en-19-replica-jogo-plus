@@ -2,7 +2,7 @@
 import "uikit/dist/css/uikit.min.css"
 import "uikit/dist/js/uikit.min.js"
 import "uikit/dist/js/uikit-icons.min.js"
-
+import Link from 'next/link'
 import MenuNavbar from '../../components/MenuNavbar'
 import HeadCustom from '../../components/HeadCustom'
 import React, { useState, useEffect } from 'react'
@@ -22,11 +22,11 @@ DetailIdea.getInitialProps = ({ query }) => {
 
 export default function DetailIdea(props) {
     const { user } = useAuth();
-    let displayNameComment = ''; 
+    let displayNameComment = '';
 
-    if(user) {
+    if (user) {
         const index = user.email.indexOf("@");
-        displayNameComment = user.email.substr(0,index);
+        displayNameComment = user.email.substr(0, index);
     } else {
         displayNameComment = "Desconhecido";
     }
@@ -34,7 +34,7 @@ export default function DetailIdea(props) {
     const [response, setResponse] = useState(null);
 
     useEffect(async () => {
-        
+
         window.history.pushState({}, null, '/ideas');
         let idea_ref = firebase.database().ref('/ideas/' + props.id);
 
@@ -122,40 +122,49 @@ export default function DetailIdea(props) {
         <div>
             <HeadCustom />
 
-                <MenuNavbar />
+            <MenuNavbar />
 
-                <div className="uk-container">
-                    <div className="uk-card uk-card-default uk-card-body">
-                        <span className="uk-label">{response.category ? response.category : " "}</span>
-                        <h1 className="uk-text-center">{FilterWords(response.title)}</h1>
-                        <p>{FilterWords(response.content)}</p>
-                        <span>Escrito por: {response.displayName}</span>
-                        <br></br>
-                        <span>Publicado em: {response.createdate}</span>
-                        <hr className="uk-divider-icon"></hr>
-                        <h2 className="uk-text-center">Comentários</h2>
-
-                        <div className="uk-card uk-card-body">
-                            <form onSubmit={handleSubmit}>
-
-                                <textarea className="uk-textarea" rows="5" placeholder="Escreve seu comentário ..." maxLength="300" type="text " name="content"
-                                    value={comment.content}
-                                    onChange={handleChange} required />
-
-                                <p className="uk-margin-bottom uk-text-dark uk-text-right"><span>Limite de 300 caracteres.</span></p>
-                                <div className="uk-flex uk-flex-right uk-margin-bottom">
-                                    <button className="uk-button uk-button-default" type="submit" >Comentar</button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <CommentCard comments={response.comments} />
-
-                    </div>
+            <div className="uk-container">
+                <div className="uk-margin-bottom uk-margin-top">
+                    <Link href="/ideas/">
+                        <a className="text-back">Voltar</a>
+                    </Link>
                 </div>
 
-                <style jsx>{`
+                <div className="uk-card uk-card-default uk-card-body">
+                    <span className="uk-label">{response.category ? response.category : " "}</span>
+                    <h1 className="uk-text-center">{FilterWords(response.title)}</h1>
+                    <p>{FilterWords(response.content)}</p>
+                    <span>Escrito por: {response.displayName}</span>
+                    <br></br>
+                    <span>Publicado em: {response.createdate}</span>
+                    <hr className="uk-divider-icon"></hr>
+                    <h2 className="uk-text-center">Comentários</h2>
 
+                    <div className="uk-card uk-card-body">
+                        <form onSubmit={handleSubmit}>
+
+                            <textarea className="uk-textarea" rows="5" placeholder="Escreve seu comentário ..." maxLength="300" type="text " name="content"
+                                value={comment.content}
+                                onChange={handleChange} required />
+
+                            <p className="uk-margin-bottom uk-text-dark uk-text-right"><span>Limite de 300 caracteres.</span></p>
+                            <div className="uk-flex uk-flex-right uk-margin-bottom">
+                                <button className="uk-button uk-button-default" type="submit" >Comentar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <CommentCard comments={response.comments} />
+
+                </div>
+            </div>
+
+            <style jsx>{`
+
+                        .text-back {
+                            color: black !important;
+                        }
                         .uk-button-default {
                             background-color: #000;;
                             color: #fff;

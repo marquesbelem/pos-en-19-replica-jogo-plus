@@ -38,9 +38,6 @@ export default function Home() {
                 <HeadCustom />
                 <MenuNavbar />
 
-                <button className="uk-button uk-button-large btn-idea" type="button">Escrever ideia</button>
-                <Write />
-
                 <div className="uk-container">
                     <div className="uk-text-center">
                         <span uk-spinner="ratio: 4.5"></span>
