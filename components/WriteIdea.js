@@ -12,9 +12,7 @@ const WriteIdea = () => {
     if(user) {
         const index = user.email.indexOf("@");
         displayName = user.email.substr(0,index);
-    } else {
-        displayName = "Desconhecido";
-    }
+    } 
 
     const genre = ModelGenre();
 
@@ -48,7 +46,13 @@ const WriteIdea = () => {
                 Router.reload(window.location.pathname);
             })
             .catch(function (error) {
-                UIkit.notification('Erro no envio da ideia, tente novamente!', 'danger');
+                if(!user)
+                 {
+                    UIkit.notification('Você precisa está logado para executar essa ação!', 'danger');
+                 } 
+                 else {
+                     UIkit.notification('Erro no envio da ideia, tente novamente!', 'danger');
+                 }
             });
 
         UIkit.dropdown('.uk-dropdown', {
