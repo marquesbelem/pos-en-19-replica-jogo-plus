@@ -27,8 +27,6 @@ export default function DetailIdea(props) {
     if (user) {
         const index = user.email.indexOf("@");
         displayNameComment = user.email.substr(0, index);
-    } else {
-        displayNameComment = "Desconhecido";
     }
 
     const [response, setResponse] = useState(null);
@@ -91,7 +89,12 @@ export default function DetailIdea(props) {
             setComment({ content: ' ' });
 
         }, function (errorObject) {
-            UIkit.notification('Erro no envio do comentario, tente novamente!', 'danger');
+            if (!user) {
+                UIkit.notification('Você precisa está logado para executar essa ação!', 'danger');
+            }
+            else {
+                UIkit.notification('Erro no envio da ideia, tente novamente!', 'danger');
+            }
         });
     };
 
