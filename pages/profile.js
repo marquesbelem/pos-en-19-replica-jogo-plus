@@ -15,7 +15,7 @@ import UIkit from "uikit";
 
 const Home = () => {
 
-    const { user } = useAuth();
+    let { user } = useAuth();
 
     const [newPassword, setNewPassaword] = useState(null);
 
@@ -30,6 +30,9 @@ const Home = () => {
         e.preventDefault();
 
         if (!user) {
+            user = {
+                email: null
+            }
             return
         }
 
