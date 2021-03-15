@@ -46,13 +46,13 @@ const WriteIdea = () => {
                 Router.reload(window.location.pathname);
             })
             .catch(function (error) {
-                if(!user)
+                /*if(!user)
                  {
                     UIkit.notification('Você precisa está logado para executar essa ação!', 'danger');
                  } 
-                 else {
+                 else {*/
                      UIkit.notification('Erro no envio da ideia, tente novamente!', 'danger');
-                 }
+                 //}
             });
 
         UIkit.dropdown('.uk-dropdown', {

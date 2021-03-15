@@ -89,12 +89,12 @@ export default function DetailIdea(props) {
             setComment({ content: ' ' });
 
         }, function (errorObject) {
-            if (!user) {
+           /* if (!user) {
                 UIkit.notification('Você precisa está logado para executar essa ação!', 'danger');
-            }
-            else {
+            }*/
+           // else {
                 UIkit.notification('Erro no envio da ideia, tente novamente!', 'danger');
-            }
+           //}
         });
     };
 

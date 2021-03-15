@@ -41,7 +41,7 @@ const Home = () => {
         })
     };
 
-    if (!user) {
+  /*  if (!user) {
         return (
             <div>
                 <HeadCustom />
@@ -63,7 +63,7 @@ const Home = () => {
                 </div>
             </div>
         )
-    }
+    }*/
 
     return (
         <div>
