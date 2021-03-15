@@ -68,6 +68,12 @@ const Home = () => {
         )
     }*/
 
+    if (!user) {
+        user = {
+            email: 'null'
+        }
+    }
+
     return (
         <div>
             <HeadCustom />
