@@ -31,7 +31,7 @@ const Home = () => {
 
         if (!user) {
             user = {
-                email: null
+                email: 'null'
             }
             return
         }
