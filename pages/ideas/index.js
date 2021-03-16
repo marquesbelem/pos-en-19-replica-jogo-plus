@@ -104,7 +104,7 @@ export default function Home() {
                                         </div>
                                         <div>
                                             <Link href="/ideas/[id]" as={'/ideas/' + idea.id}>
-                                                <a className="uk-button uk-button-default uk-button-around">Saiba mais</a>
+                                                <a className="uk-button uk-button-default uk-button-around" id="btn-saber-mais">Saiba mais</a>
                                             </Link>
                                         </div>
                                     </div>
