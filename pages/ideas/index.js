@@ -73,7 +73,7 @@ export default function Home() {
                 <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky" className="uk-margin-bottom">
                     <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="dropbar: true;">
                         <div className="uk-flex">
-                            <button className="uk-button uk-button-large btn-idea" type="button">Escrever ideia</button>
+                            <button className="uk-button uk-button-large btn-idea" id="btn-escrever-ideia" type="button">Escrever ideia</button>
                             <Write />
                         </div>
                     </nav>

@@ -44,29 +44,29 @@ const Home = () => {
         })
     };
 
-  /*  if (!user) {
-        return (
-            <div>
-                <HeadCustom />
-                <MenuNavbar />
-
-                <div className="uk-container uk-margin-top">
-                    <div className="uk-child-width-1-2@m uk-flex uk-flex-wrap uk-flex-center" uk-grid="true">
-                        <div className="uk-card uk-card-default uk-card-body">
-                            <div class="uk-card-header">
-                                <div class="uk-grid-small uk-flex-middle" uk-grid>
-                                    <p>Área restriata criador(a), para acessa-la é necessário ter cadastro na plataforma.</p>
-                                    <div class="uk-width-auto">
-                                        <img src="stop.png" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }*/
+    /*  if (!user) {
+          return (
+              <div>
+                  <HeadCustom />
+                  <MenuNavbar />
+  
+                  <div className="uk-container uk-margin-top">
+                      <div className="uk-child-width-1-2@m uk-flex uk-flex-wrap uk-flex-center" uk-grid="true">
+                          <div className="uk-card uk-card-default uk-card-body">
+                              <div class="uk-card-header">
+                                  <div class="uk-grid-small uk-flex-middle" uk-grid>
+                                      <p>Área restriata criador(a), para acessa-la é necessário ter cadastro na plataforma.</p>
+                                      <div class="uk-width-auto">
+                                          <img name="msg-restrita" src="stop.png" />
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          )
+      }*/
 
     if (!user) {
         user = {
@@ -86,7 +86,7 @@ const Home = () => {
                             <div class="uk-grid-small uk-flex-middle" uk-grid>
                                 <h3 class="uk-card-title">Eai criador(a), essa será sua área exclusiva! </h3>
                                 <div class="uk-width-auto">
-                                    <img src="badge.png" />
+                                    <img name="msg-bem-vindo" src="badge.png" />
                                 </div>
                                 <div class="uk-width-expand uk-margin-top">
                                     <h4 >Futuramente, aqui que você terá acesso outras funcionalidades da plataforma,
@@ -103,7 +103,7 @@ const Home = () => {
                             <p className="uk-margin-remove-top">
                                 {user.email}
                             </p>
-                            <button class="uk-button uk-button-default" type="button" onClick={handleSubmit}>Mudar senha</button>
+                            <button class="uk-button uk-button-default" name="btn-mudar-senha" type="button" onClick={handleSubmit}>Mudar senha</button>
                         </div>
                     </div>
                 </div>

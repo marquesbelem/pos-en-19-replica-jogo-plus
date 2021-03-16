@@ -85,7 +85,7 @@ export default function DetailIdea(props) {
 
         idea_ref.update(updateData).then(() => {
 
-            UIkit.notification('Seu comentario foi enviado com sucesso!', 'success');
+            UIkit.notification("<p id='msg-sucess'>Seu comentario foi enviado com sucesso!</p>", 'success');
             setComment({ content: ' ' });
 
         }, function (errorObject) {
@@ -93,7 +93,7 @@ export default function DetailIdea(props) {
                 UIkit.notification('Você precisa está logado para executar essa ação!', 'danger');
             }*/
            // else {
-                UIkit.notification('Erro no envio da ideia, tente novamente!', 'danger');
+                UIkit.notification("<p id='msg-error'>Erro no envio da ideia, tente novamente!</p>", 'danger');
            //}
         });
     };
@@ -147,13 +147,13 @@ export default function DetailIdea(props) {
                     <div className="uk-card uk-card-body">
                         <form onSubmit={handleSubmit}>
 
-                            <textarea className="uk-textarea" rows="5" placeholder="Escreve seu comentário ..." maxLength="300" type="text " name="content"
+                            <textarea className="uk-textarea" rows="5" placeholder="Escreve seu comentário ..." maxLength="300" type="text " id="comentario" name="content"
                                 value={comment.content}
                                 onChange={handleChange} required />
 
                             <p className="uk-margin-bottom uk-text-dark uk-text-right"><span>Limite de 300 caracteres.</span></p>
                             <div className="uk-flex uk-flex-right uk-margin-bottom">
-                                <button className="uk-button uk-button-default" type="submit" >Comentar</button>
+                                <button className="uk-button uk-button-default" type="submit" id="btn-enviar-comentario">Comentar</button>
                             </div>
                         </form>
                     </div>

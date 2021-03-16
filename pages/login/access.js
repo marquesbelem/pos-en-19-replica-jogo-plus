@@ -30,9 +30,9 @@ export default function Home() {
             .then(function () {
                 //window.location.href =  '/ideas/';
                 router.push('/ideas/');
-                UIkit.notification("Login feito com sucesso!", 'success');
+                UIkit.notification("<p id='msg-sucess'>Login feito com sucesso!</p>", 'success');
             }).catch(function (error) {
-                UIkit.notification(error.message, 'danger');
+                UIkit.notification("<p id='msg-error'>"+error.message+"</p>", 'danger');
             })
     };
 
@@ -48,12 +48,12 @@ export default function Home() {
                         <form onSubmit={handleSubmit}>
 
                             <input className="uk-input uk-margin-bottom" placeholder="Email" type="email"
-                                name="email" value={data.email} onChange={handleChange} required />
+                                name="email" id="email" value={data.email} onChange={handleChange} required />
 
                             <input className="uk-input uk-margin-bottom" placeholder="Senha" type="password"
-                                name="pass" value={data.pass} onChange={handleChange} required />
+                                name="pass" id="pass" value={data.pass} onChange={handleChange} required />
 
-                            <button className="uk-button uk-button-default bt-enviar" type="submit" >Entrar</button>
+                            <button className="uk-button uk-button-default bt-enviar" id="btn-entrar" type="submit" >Entrar</button>
                             <p>
                                 <Link href="/login/reset-password">
                                     <a>Esqueceu a senha?</a>

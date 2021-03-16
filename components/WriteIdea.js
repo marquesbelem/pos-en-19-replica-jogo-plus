@@ -42,7 +42,7 @@ const WriteIdea = () => {
 
         idea_ref.push(data)
             .then(function () {
-                UIkit.notification('Sua ideia foi enviada com sucesso!', 'success');
+                UIkit.notification('<p id="msg-sucess">Sua ideia foi enviada com sucesso!</p>', 'success');
                 Router.reload(window.location.pathname);
             })
             .catch(function (error) {
@@ -51,7 +51,7 @@ const WriteIdea = () => {
                     UIkit.notification('Você precisa está logado para executar essa ação!', 'danger');
                  } 
                  else {*/
-                     UIkit.notification('Erro no envio da ideia, tente novamente!', 'danger');
+                     UIkit.notification('<p id="msg-error">Erro no envio da ideia, tente novamente!</p>', 'danger');
                  //}
             });
 
@@ -67,9 +67,9 @@ const WriteIdea = () => {
                     <form onSubmit={handleSubmit}>
 
                         <input className="uk-input uk-margin-bottom" placeholder="Título" type="text"
-                            name="title" value={data.title} onChange={handleChange} required />
+                            name="title" id="title" value={data.title} onChange={handleChange} required />
 
-                        <textarea className="uk-textarea" rows="5" placeholder="Descrição ..." maxLength="300" type="text " name="content"
+                        <textarea className="uk-textarea" rows="5" placeholder="Descrição ..." maxLength="300" type="text " id="content" name="content"
                             value={data.content}
                             onChange={handleChange} required/>
 
@@ -78,13 +78,13 @@ const WriteIdea = () => {
                         <label>Qual gênero mais se encaixa na sua ideia?</label>
                         <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                             {genre.map((g) => (
-                                <label key={g.id}><input className="uk-radio" type="radio" name="category"
+                                <label key={g.id}><input className="uk-radio" type="radio" name="category" id={g.id}
                                     value={g.title}
                                     onChange={handleChange} /> {g.title}</label>
                             ))}
                         </div>
 
-                        <button className="uk-button uk-button-default bt-enviar" type="submit" >Enviar</button>
+                        <button className="uk-button uk-button-default bt-enviar" id="btn-enviar-ideia" type="submit" >Enviar</button>
                     </form>
                 </div>
 
