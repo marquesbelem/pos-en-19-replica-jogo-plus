@@ -15,6 +15,7 @@ export default function Home() {
 
     const [data, setData] = useState("");
     const router = useRouter();
+    let messageError = ''; 
 
     const handleChange = ({ target: { name, value } }) => {
         setData(prev => ({
@@ -31,8 +32,10 @@ export default function Home() {
                 //window.location.href =  '/ideas/';
                 router.push('/ideas/');
                 UIkit.notification("<p id='msg-sucess'>Login feito com sucesso!</p>", 'success');
+                messageError = '';
             }).catch(function (error) {
-                UIkit.notification("<p id='msg-error'>"+error.message+"</p>", 'danger');
+                messageError = error.message;
+                UIkit.notification("<p name='msg-error'>"+error.message+"</p>", 'danger');
             })
     };
 
@@ -45,6 +48,7 @@ export default function Home() {
                 <div className="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-flex uk-flex-center uk-flex-middle">
                     <div className="uk-card uk-card-default uk-card-body uk-text-center">
                         <h3 className="uk-card-title">Login</h3>
+                        <p name="msg-error">{messageError}</p>
                         <form onSubmit={handleSubmit}>
 
                             <input className="uk-input uk-margin-bottom" placeholder="Email" type="email"

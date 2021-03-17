@@ -20,7 +20,7 @@ export default function Home() {
     let count = 5; 
     
     const loadData = () => {
-        let idea_ref = firebase.database().ref('ideas').limitToFirst(count);
+        let idea_ref = firebase.database().ref('ideas').orderByChild('createdate').limitToFirst(count);
         idea_ref.on('value', (snapshot) => {
             let _idea = [];
 

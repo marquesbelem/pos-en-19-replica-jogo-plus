@@ -16,8 +16,7 @@ const WriteIdea = () => {
 
     const genre = ModelGenre();
 
-    let date = new Date();
-    let dateFormatada = ((date.getDate())) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear();
+    let dateFormatada = firebase.database.ServerValue.TIMESTAMP;
 
     const [data, setData] = useState({
         title: '',

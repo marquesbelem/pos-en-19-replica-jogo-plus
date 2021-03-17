@@ -11,6 +11,7 @@ import CommentCard from '../../components/CommentCard'
 import firebase from "../../config/firebase-client"
 import ModelIdea from "../../config/data-idea"
 import FilterWords from "../../config/moderation-words"
+import TransformDate from "../../config/transform-date"
 import GenereteId from "../../config/generate-id"
 import { useAuth } from "../../config/auth";
 
@@ -41,8 +42,7 @@ export default function DetailIdea(props) {
         });
     }, []);
 
-    let date = new Date();
-    let dateFormatada = ((date.getDate())) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear();
+    let dateFormatada = firebase.database.ServerValue.TIMESTAMP;
 
     const [comment, setComment] = useState({
         id: GenereteId(),
@@ -140,7 +140,7 @@ export default function DetailIdea(props) {
                     <p>{FilterWords(response.content)}</p>
                     <span>Escrito por: {response.displayName}</span>
                     <br></br>
-                    <span>Publicado em: {response.createdate}</span>
+                    <span>Publicado em: {TransformDate(response.createdate)}</span>
                     <hr className="uk-divider-icon"></hr>
                     <h2 className="uk-text-center">Comentários</h2>
 

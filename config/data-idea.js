@@ -1,4 +1,5 @@
 const DataIdea = (_data, key) => {
+    
     const idea = {
         id: key,
         title: _data.title,

@@ -43,7 +43,7 @@ const MenuAuth = () => {
         <div className="uk-navbar-right">
             <div className="uk-navbar-item">
                 <Link href="/login/access">
-                    <a className="uk-button entrar">Entrar</a>
+                    <a className="uk-button entrar" id="btn-access">Entrar</a>
                 </Link>
                 <Link href="/login/register">
                     <a className="uk-button cadastrar">Cadastrar</a>
