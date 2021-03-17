@@ -26,10 +26,10 @@ export default function Home() {
 
         await firebase.auth().sendPasswordResetEmail(data.email)
             .then(function () {
-                UIkit.notification("Uma mensagem foi enviada para o email solicitado", 'success');
+                UIkit.notification("<p id='msg-sucesso'>Uma mensagem foi enviada para o email solicitado</p>", 'success');
                 router.push('/login/access');
             }).catch(function (error) {
-                UIkit.notification(error.message, 'danger');
+                UIkit.notification("<p id='msg-error'>"+error.message+"</p>", 'danger');
             })
     };
 
@@ -46,7 +46,7 @@ export default function Home() {
                             <input className="uk-input uk-margin-bottom" placeholder="Email" type="email"
                                 name="email" value={data.email} onChange={handleChange} required />
 
-                            <button className="uk-button uk-button-default bt-enviar" type="submit" >Enviar</button>
+                            <button className="uk-button uk-button-default bt-enviar" type="submit" id="btn-enviar-esqueceu-senha" >Enviar</button>
                         </form>
                     </div>
                 </div>
