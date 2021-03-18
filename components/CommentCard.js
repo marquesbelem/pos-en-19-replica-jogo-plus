@@ -27,7 +27,7 @@ const CommentCard = ({ comments }) => {
                             </div>
                         </header>
                         <div className="uk-comment-body">
-                            <p>{FilterWords(comment.content)}</p>
+                            <p id={"comment-"+comment.content}>{FilterWords(comment.content)}</p>
                         </div>
                     </article>
                 </div>

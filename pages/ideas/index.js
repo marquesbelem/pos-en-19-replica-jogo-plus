@@ -95,9 +95,9 @@ export default function Home() {
                             <div fill={idea.category ? idea.category : " "} key={idea.id}>
                                 <div className="uk-card uk-card-default uk-card-hover uk-card-body uk-margin-bottom">
                                     <span className="uk-label">{idea.category ? idea.category : " "}</span>
-                                    <div dangerouslySetInnerHTML={{ __html: idea.title }} />
+                                    <div id={"titulo-"+idea.title} dangerouslySetInnerHTML={{ __html: idea.title }} />
                                     {/* <h3 className="uk-card-title">{FilterWords(idea.title)}</h3> */}
-                                    <p className="wrap-overflow">{FilterWords(idea.content)}</p>
+                                    <p id={"descricao-"+idea.title} className="wrap-overflow">{FilterWords(idea.content)}</p>
 
                                     <div className="uk-flex uk-flex-between">
                                         <div>
