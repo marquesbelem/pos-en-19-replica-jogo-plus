@@ -1,5 +1,6 @@
 import React from 'react'
 import FilterWords from "../config/moderation-words"
+import TransformDate from "../config/transform-date"
 
 const CommentCard = ({ comments }) => {
 
@@ -19,9 +20,9 @@ const CommentCard = ({ comments }) => {
                         <header className="uk-comment-header">
                             <div className="uk-grid-medium uk-flex-middle" uk-grid="true">
                                 <div className="uk-width-expand">
-                                    <h4 className="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#" id={comment.id+"display-name"}>{comment.displayName}</a></h4>
+                                    <h4 className="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#" id="display-name">{comment.displayName}</a></h4>
                                     <ul className="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                        <li>{comment.datePublish}</li>
+                                        <li>{TransformDate(comment.datePublish)}</li>
                                     </ul>
                                 </div>
                             </div>
